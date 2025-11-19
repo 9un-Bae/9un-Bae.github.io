@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Johnny Bae">
+
+<title>Pokemon Dashboard</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="pokemon_dashboard_files/libs/clipboard/clipboard.min.js"></script>
+<script src="pokemon_dashboard_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="pokemon_dashboard_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="pokemon_dashboard_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="pokemon_dashboard_files/libs/quarto-html/popper.min.js"></script>
+<script src="pokemon_dashboard_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="pokemon_dashboard_files/libs/quarto-html/anchor.min.js"></script>
+<link href="pokemon_dashboard_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="pokemon_dashboard_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="pokemon_dashboard_files/libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="pokemon_dashboard_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="pokemon_dashboard_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="pokemon_dashboard_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="pokemon_dashboard_files/libs/bootstrap/bootstrap-78b5adbbc375d7e18de0e8bd95e59b2b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="pokemon_dashboard_files/libs/bootstrap/bootstrap-dark-78b5adbbc375d7e18de0e8bd95e59b2b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="pokemon_dashboard_files/libs/bootstrap/bootstrap-78b5adbbc375d7e18de0e8bd95e59b2b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="pokemon_dashboard_files/libs/quarto-dashboard/quarto-dashboard.js"></script>
+<script src="pokemon_dashboard_files/libs/quarto-dashboard/stickythead.js"></script>
+
+
+
+<script src="pokemon_dashboard_files/libs/quarto-dashboard/web-components.js" type="module"></script>
+<script src="pokemon_dashboard_files/libs/quarto-dashboard/components.js"></script>
+
+<link href="pokemon_dashboard_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="pokemon_dashboard_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="pokemon_dashboard_files/libs/plotly-binding-4.11.0/plotly.js"></script>
+<script src="pokemon_dashboard_files/libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="pokemon_dashboard_files/libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="pokemon_dashboard_files/libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="pokemon_dashboard_files/libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="pokemon_dashboard_files/libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="pokemon_dashboard_files/libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+</head>
+
+<body class="quarto-dashboard dashboard-fill fullcontent quarto-light">
+
+<header id="quarto-dashboard-header">
+<nav class="navbar navbar-expand-md slim" data-bs-theme="dark">
+  <div class="navbar-container container-fluid">
+    <button class="navbar-toggler hidden" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-controls="dashboard-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>    
+
+
+    <div class="navbar-brand-container">
+
+
+      <div class="navbar-title">
+        <div class="navbar-title-text"><a href="#">Pokemon Dashboard</a></div>
+        
+        <div class="navbar-author">Johnny Bae</div>
+      </div>
+    </div>
+</div>
+</nav>
+</header>
+<div class="page-layout-custom quarto-dashboard-content bslib-gap-spacing html-fill-container bslib-page-fill">  
+
+<p style="text-align:center;">
+<img src="image.png" style="height:180px; border-radius:12px;">
+</p>
+<hr class="bslib-grid-item html-fill-item">
+<div class="callout callout-style-default callout-note callout-titled bslib-grid-item">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Dashboard Overview
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Total Pokemon:</strong> 720</li>
+<li><strong>Number of Types:</strong> 18</li>
+<li><strong>Legendary Pokemon:</strong> 40</li>
+</ul>
+<p><em>Data Source: <a href="https://www.kaggle.com/datasets/abcsds/pokemon">Pokemon Dataset - Kaggle</a></em></p>
+<p>This dashboard compares Pokemon stats across types, generations, and overall power.</p>
+</div>
+</div>
+<div class="bslib-grid-item html-fill-item bslib-grid" data-layout="fill" style="display: grid; grid-template-rows: minmax(3em, 1fr) minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="plotly html-widget html-fill-item html-fill-container" id="htmlwidget-c8d65b1f291fd3fe9752" style="width:100%;height:406px;"></div>
+<script type="application/json" data-for="htmlwidget-c8d65b1f291fd3fe9752">{"x":{"data":[{"x":[70,90,70,90,29,45,35,30,30,95,109,50,65,135,90,77,120,125,47,47,25,75,25,85,85,103,35,20,60,20,94,45,90,70,95,65,125,35,130,100,110,53,90,40,10,35,22,60,30,63,45,65,55,80,52,73,60,35,55,59,79,45,65],"y":[40,70,50,40,45,50,55,35,42,125,112,70,85,105,140,60,95,75,55,50,50,45,41,51,55,80,50,30,62,55,50,90,45,55,80,90,100,40,100,89,80,70,45,85,230,55,60,40,32,90,59,60,50,102,50,55,65,30,99,85,105,35,45],"text":["Name: Accelgor <br>Type: Bug  <br>Attack: 70 <br>Defense: 40 <br>Total: 495","Name: Ariados <br>Type: Bug / Poison <br>Attack: 90 <br>Defense: 70 <br>Total: 390","Name: Beautifly <br>Type: Bug / Flying <br>Attack: 70 <br>Defense: 50 <br>Total: 395","Name: Beedrill <br>Type: Bug / Poison <br>Attack: 90 <br>Defense: 40 <br>Total: 395","Name: Burmy <br>Type: Bug  <br>Attack: 29 <br>Defense: 45 <br>Total: 224","Name: Butterfree <br>Type: Bug / Flying <br>Attack: 45 <br>Defense: 50 <br>Total: 395","Name: Cascoon <br>Type: Bug  <br>Attack: 35 <br>Defense: 55 <br>Total: 205","Name: Caterpie <br>Type: Bug  <br>Attack: 30 <br>Defense: 35 <br>Total: 195","Name: Combee <br>Type: Bug / Flying <br>Attack: 30 <br>Defense: 42 <br>Total: 244","Name: Crustle <br>Type: Bug / Rock <br>Attack: 95 <br>Defense: 125 <br>Total: 475","Name: Durant <br>Type: Bug / Steel <br>Attack: 109 <br>Defense: 112 <br>Total: 484","Name: Dustox <br>Type: Bug / Poison <br>Attack: 50 <br>Defense: 70 <br>Total: 385","Name: Dwebble <br>Type: Bug / Rock <br>Attack: 65 <br>Defense: 85 <br>Total: 325","Name: Escavalier <br>Type: Bug / Steel <br>Attack: 135 <br>Defense: 105 <br>Total: 495","Name: Forretress <br>Type: Bug / Steel <br>Attack: 90 <br>Defense: 140 <br>Total: 465","Name: Galvantula <br>Type: Bug / Electric <br>Attack: 77 <br>Defense: 60 <br>Total: 472","Name: Genesect <br>Type: Bug / Steel <br>Attack: 120 <br>Defense: 95 <br>Total: 600","Name: Heracross <br>Type: Bug / Fighting <br>Attack: 125 <br>Defense: 75 <br>Total: 500","Name: Illumise <br>Type: Bug  <br>Attack: 47 <br>Defense: 55 <br>Total: 400","Name: Joltik <br>Type: Bug / Electric <br>Attack: 47 <br>Defense: 50 <br>Total: 319","Name: Kakuna <br>Type: Bug / Poison <br>Attack: 25 <br>Defense: 50 <br>Total: 205","Name: Karrablast <br>Type: Bug  <br>Attack: 75 <br>Defense: 45 <br>Total: 315","Name: Kricketot <br>Type: Bug  <br>Attack: 25 <br>Defense: 41 <br>Total: 194","Name: Kricketune <br>Type: Bug  <br>Attack: 85 <br>Defense: 51 <br>Total: 384","Name: Larvesta <br>Type: Bug / Fire <br>Attack: 85 <br>Defense: 55 <br>Total: 360","Name: Leavanny <br>Type: Bug / Grass <br>Attack: 103 <br>Defense: 80 <br>Total: 500","Name: Ledian <br>Type: Bug / Flying <br>Attack: 35 <br>Defense: 50 <br>Total: 390","Name: Ledyba <br>Type: Bug / Flying <br>Attack: 20 <br>Defense: 30 <br>Total: 265","Name: Masquerain <br>Type: Bug / Flying <br>Attack: 60 <br>Defense: 62 <br>Total: 414","Name: Metapod <br>Type: Bug  <br>Attack: 20 <br>Defense: 55 <br>Total: 205","Name: Mothim <br>Type: Bug / Flying <br>Attack: 94 <br>Defense: 50 <br>Total: 424","Name: Nincada <br>Type: Bug / Ground <br>Attack: 45 <br>Defense: 90 <br>Total: 266","Name: Ninjask <br>Type: Bug / Flying <br>Attack: 90 <br>Defense: 45 <br>Total: 456","Name: Paras <br>Type: Bug / Grass <br>Attack: 70 <br>Defense: 55 <br>Total: 285","Name: Parasect <br>Type: Bug / Grass <br>Attack: 95 <br>Defense: 80 <br>Total: 405","Name: Pineco <br>Type: Bug  <br>Attack: 65 <br>Defense: 90 <br>Total: 290","Name: Pinsir <br>Type: Bug  <br>Attack: 125 <br>Defense: 100 <br>Total: 500","Name: Scatterbug <br>Type: Bug  <br>Attack: 35 <br>Defense: 40 <br>Total: 200","Name: Scizor <br>Type: Bug / Steel <br>Attack: 130 <br>Defense: 100 <br>Total: 500","Name: Scolipede <br>Type: Bug / Poison <br>Attack: 100 <br>Defense: 89 <br>Total: 485","Name: Scyther <br>Type: Bug / Flying <br>Attack: 110 <br>Defense: 80 <br>Total: 500","Name: Sewaddle <br>Type: Bug / Grass <br>Attack: 53 <br>Defense: 70 <br>Total: 310","Name: Shedinja <br>Type: Bug / Ghost <br>Attack: 90 <br>Defense: 45 <br>Total: 236","Name: Shelmet <br>Type: Bug  <br>Attack: 40 <br>Defense: 85 <br>Total: 305","Name: Shuckle <br>Type: Bug / Rock <br>Attack: 10 <br>Defense: 230 <br>Total: 505","Name: Silcoon <br>Type: Bug  <br>Attack: 35 <br>Defense: 55 <br>Total: 205","Name: Spewpa <br>Type: Bug  <br>Attack: 22 <br>Defense: 60 <br>Total: 213","Name: Spinarak <br>Type: Bug / Poison <br>Attack: 60 <br>Defense: 40 <br>Total: 250","Name: Surskit <br>Type: Bug / Water <br>Attack: 30 <br>Defense: 32 <br>Total: 269","Name: Swadloon <br>Type: Bug / Grass <br>Attack: 63 <br>Defense: 90 <br>Total: 380","Name: Venipede <br>Type: Bug / Poison <br>Attack: 45 <br>Defense: 59 <br>Total: 260","Name: Venomoth <br>Type: Bug / Poison <br>Attack: 65 <br>Defense: 60 <br>Total: 450","Name: Venonat <br>Type: Bug / Poison <br>Attack: 55 <br>Defense: 50 <br>Total: 305","Name: Vespiquen <br>Type: Bug / Flying <br>Attack: 80 <br>Defense: 102 <br>Total: 474","Name: Vivillon <br>Type: Bug / Flying <br>Attack: 52 <br>Defense: 50 <br>Total: 411","Name: Volbeat <br>Type: Bug  <br>Attack: 73 <br>Defense: 55 <br>Total: 400","Name: Volcarona <br>Type: Bug / Fire <br>Attack: 60 <br>Defense: 65 <br>Total: 550","Name: Weedle <br>Type: Bug / Poison <br>Attack: 35 <br>Defense: 30 <br>Total: 195","Name: Whirlipede <br>Type: Bug / Poison <br>Attack: 55 <br>Defense: 99 <br>Total: 360","Name: WormadamPlant Cloak <br>Type: Bug / Grass <br>Attack: 59 <br>Defense: 85 <br>Total: 424","Name: WormadamSandy Cloak <br>Type: Bug / Ground <br>Attack: 79 <br>Defense: 105 <br>Total: 424","Name: Wurmple <br>Type: Bug  <br>Attack: 45 <br>Defense: 35 <br>Total: 195","Name: Yanma <br>Type: Bug / Flying <br>Attack: 65 <br>Defense: 45 <br>Total: 390"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(168,184,32,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(168,184,32,1)"}},"hoveron":"points","name":"Bug","legendgroup":"Bug","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[130,125,90,65,125,90,60,105,54,88,92,65,90,85,85,55,50,75,90,75,95,65,55,120,131,105,65,85],"y":[60,100,90,50,52,50,30,90,53,50,88,105,70,42,70,35,37,75,115,70,55,110,75,65,95,60,40,70],"text":["Name: Absol <br>Type: Dark  <br>Attack: 130 <br>Defense: 60 <br>Total: 465","Name: Bisharp <br>Type: Dark / Steel <br>Attack: 125 <br>Defense: 100 <br>Total: 490","Name: Darkrai <br>Type: Dark  <br>Attack: 90 <br>Defense: 90 <br>Total: 600","Name: Deino <br>Type: Dark / Dragon <br>Attack: 65 <br>Defense: 50 <br>Total: 300","Name: Honchkrow <br>Type: Dark / Flying <br>Attack: 125 <br>Defense: 52 <br>Total: 505","Name: Houndoom <br>Type: Dark / Fire <br>Attack: 90 <br>Defense: 50 <br>Total: 500","Name: Houndour <br>Type: Dark / Fire <br>Attack: 60 <br>Defense: 30 <br>Total: 330","Name: Hydreigon <br>Type: Dark / Dragon <br>Attack: 105 <br>Defense: 90 <br>Total: 600","Name: Inkay <br>Type: Dark / Psychic <br>Attack: 54 <br>Defense: 53 <br>Total: 288","Name: Liepard <br>Type: Dark  <br>Attack: 88 <br>Defense: 50 <br>Total: 446","Name: Malamar <br>Type: Dark / Psychic <br>Attack: 92 <br>Defense: 88 <br>Total: 482","Name: Mandibuzz <br>Type: Dark / Flying <br>Attack: 65 <br>Defense: 105 <br>Total: 510","Name: Mightyena <br>Type: Dark  <br>Attack: 90 <br>Defense: 70 <br>Total: 420","Name: Murkrow <br>Type: Dark / Flying <br>Attack: 85 <br>Defense: 42 <br>Total: 405","Name: Pawniard <br>Type: Dark / Steel <br>Attack: 85 <br>Defense: 70 <br>Total: 340","Name: Poochyena <br>Type: Dark  <br>Attack: 55 <br>Defense: 35 <br>Total: 220","Name: Purrloin <br>Type: Dark  <br>Attack: 50 <br>Defense: 37 <br>Total: 281","Name: Sableye <br>Type: Dark / Ghost <br>Attack: 75 <br>Defense: 75 <br>Total: 380","Name: Scrafty <br>Type: Dark / Fighting <br>Attack: 90 <br>Defense: 115 <br>Total: 488","Name: Scraggy <br>Type: Dark / Fighting <br>Attack: 75 <br>Defense: 70 <br>Total: 348","Name: Sneasel <br>Type: Dark / Ice <br>Attack: 95 <br>Defense: 55 <br>Total: 430","Name: Umbreon <br>Type: Dark  <br>Attack: 65 <br>Defense: 110 <br>Total: 525","Name: Vullaby <br>Type: Dark / Flying <br>Attack: 55 <br>Defense: 75 <br>Total: 370","Name: Weavile <br>Type: Dark / Ice <br>Attack: 120 <br>Defense: 65 <br>Total: 510","Name: Yveltal <br>Type: Dark / Flying <br>Attack: 131 <br>Defense: 95 <br>Total: 680","Name: Zoroark <br>Type: Dark  <br>Attack: 105 <br>Defense: 60 <br>Total: 510","Name: Zorua <br>Type: Dark  <br>Attack: 65 <br>Defense: 40 <br>Total: 330","Name: Zweilous <br>Type: Dark / Dragon <br>Attack: 85 <br>Defense: 70 <br>Total: 420"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(112,88,72,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(112,88,72,1)"}},"hoveron":"points","name":"Dark","legendgroup":"Dark","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[70,87,75,84,134,64,120,117,90,130,70,100,50,147,130,80,90,150,120,135,95,75,150],"y":[90,60,60,65,95,45,90,70,65,95,45,70,35,90,90,90,80,90,100,80,100,53,120],"text":["Name: Altaria <br>Type: Dragon / Flying <br>Attack: 70 <br>Defense: 90 <br>Total: 490","Name: Axew <br>Type: Dragon  <br>Attack: 87 <br>Defense: 60 <br>Total: 320","Name: Bagon <br>Type: Dragon  <br>Attack: 75 <br>Defense: 60 <br>Total: 300","Name: Dragonair <br>Type: Dragon  <br>Attack: 84 <br>Defense: 65 <br>Total: 420","Name: Dragonite <br>Type: Dragon / Flying <br>Attack: 134 <br>Defense: 95 <br>Total: 600","Name: Dratini <br>Type: Dragon  <br>Attack: 64 <br>Defense: 45 <br>Total: 300","Name: Druddigon <br>Type: Dragon  <br>Attack: 120 <br>Defense: 90 <br>Total: 485","Name: Fraxure <br>Type: Dragon  <br>Attack: 117 <br>Defense: 70 <br>Total: 410","Name: Gabite <br>Type: Dragon / Ground <br>Attack: 90 <br>Defense: 65 <br>Total: 410","Name: Garchomp <br>Type: Dragon / Ground <br>Attack: 130 <br>Defense: 95 <br>Total: 600","Name: Gible <br>Type: Dragon / Ground <br>Attack: 70 <br>Defense: 45 <br>Total: 300","Name: Goodra <br>Type: Dragon  <br>Attack: 100 <br>Defense: 70 <br>Total: 600","Name: Goomy <br>Type: Dragon  <br>Attack: 50 <br>Defense: 35 <br>Total: 300","Name: Haxorus <br>Type: Dragon  <br>Attack: 147 <br>Defense: 90 <br>Total: 540","Name: Kyurem <br>Type: Dragon / Ice <br>Attack: 130 <br>Defense: 90 <br>Total: 660","Name: Latias <br>Type: Dragon / Psychic <br>Attack: 80 <br>Defense: 90 <br>Total: 600","Name: Latios <br>Type: Dragon / Psychic <br>Attack: 90 <br>Defense: 80 <br>Total: 600","Name: Rayquaza <br>Type: Dragon / Flying <br>Attack: 150 <br>Defense: 90 <br>Total: 680","Name: Reshiram <br>Type: Dragon / Fire <br>Attack: 120 <br>Defense: 100 <br>Total: 680","Name: Salamence <br>Type: Dragon / Flying <br>Attack: 135 <br>Defense: 80 <br>Total: 600","Name: Shelgon <br>Type: Dragon  <br>Attack: 95 <br>Defense: 100 <br>Total: 420","Name: Sliggoo <br>Type: Dragon  <br>Attack: 75 <br>Defense: 53 <br>Total: 452","Name: Zekrom <br>Type: Dragon / Electric <br>Attack: 150 <br>Defense: 120 <br>Total: 680"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(112,56,248,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(112,56,248,1)"}},"hoveron":"points","name":"Dragon","legendgroup":"Dragon","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[75,60,58,85,115,83,123,45,50,63,75,55,55,38,65,85,120,35,60,70,75,40,40,45,40,55,50,90,85,50,65,65,65,65,65,55,30,90,100],"y":[85,32,57,70,80,57,67,40,70,37,60,55,52,33,60,49,79,70,95,115,60,40,50,70,15,40,40,55,75,77,107,107,107,107,34,40,50,85,63],"text":["Name: Ampharos <br>Type: Electric  <br>Attack: 75 <br>Defense: 85 <br>Total: 510","Name: Blitzle <br>Type: Electric  <br>Attack: 60 <br>Defense: 32 <br>Total: 295","Name: Dedenne <br>Type: Electric / Fairy <br>Attack: 58 <br>Defense: 57 <br>Total: 431","Name: Eelektrik <br>Type: Electric  <br>Attack: 85 <br>Defense: 70 <br>Total: 405","Name: Eelektross <br>Type: Electric  <br>Attack: 115 <br>Defense: 80 <br>Total: 515","Name: Electabuzz <br>Type: Electric  <br>Attack: 83 <br>Defense: 57 <br>Total: 490","Name: Electivire <br>Type: Electric  <br>Attack: 123 <br>Defense: 67 <br>Total: 540","Name: Electrike <br>Type: Electric  <br>Attack: 45 <br>Defense: 40 <br>Total: 295","Name: Electrode <br>Type: Electric  <br>Attack: 50 <br>Defense: 70 <br>Total: 480","Name: Elekid <br>Type: Electric  <br>Attack: 63 <br>Defense: 37 <br>Total: 360","Name: Emolga <br>Type: Electric / Flying <br>Attack: 75 <br>Defense: 60 <br>Total: 428","Name: Flaaffy <br>Type: Electric  <br>Attack: 55 <br>Defense: 55 <br>Total: 365","Name: Heliolisk <br>Type: Electric / Normal <br>Attack: 55 <br>Defense: 52 <br>Total: 481","Name: Helioptile <br>Type: Electric / Normal <br>Attack: 38 <br>Defense: 33 <br>Total: 289","Name: Jolteon <br>Type: Electric  <br>Attack: 65 <br>Defense: 60 <br>Total: 525","Name: Luxio <br>Type: Electric  <br>Attack: 85 <br>Defense: 49 <br>Total: 363","Name: Luxray <br>Type: Electric  <br>Attack: 120 <br>Defense: 79 <br>Total: 523","Name: Magnemite <br>Type: Electric / Steel <br>Attack: 35 <br>Defense: 70 <br>Total: 325","Name: Magneton <br>Type: Electric / Steel <br>Attack: 60 <br>Defense: 95 <br>Total: 465","Name: Magnezone <br>Type: Electric / Steel <br>Attack: 70 <br>Defense: 115 <br>Total: 535","Name: Manectric <br>Type: Electric  <br>Attack: 75 <br>Defense: 60 <br>Total: 475","Name: Mareep <br>Type: Electric  <br>Attack: 40 <br>Defense: 40 <br>Total: 280","Name: Minun <br>Type: Electric  <br>Attack: 40 <br>Defense: 50 <br>Total: 405","Name: Pachirisu <br>Type: Electric  <br>Attack: 45 <br>Defense: 70 <br>Total: 405","Name: Pichu <br>Type: Electric  <br>Attack: 40 <br>Defense: 15 <br>Total: 205","Name: Pikachu <br>Type: Electric  <br>Attack: 55 <br>Defense: 40 <br>Total: 320","Name: Plusle <br>Type: Electric  <br>Attack: 50 <br>Defense: 40 <br>Total: 405","Name: Raichu <br>Type: Electric  <br>Attack: 90 <br>Defense: 55 <br>Total: 485","Name: Raikou <br>Type: Electric  <br>Attack: 85 <br>Defense: 75 <br>Total: 580","Name: Rotom <br>Type: Electric / Ghost <br>Attack: 50 <br>Defense: 77 <br>Total: 440","Name: RotomFan Rotom <br>Type: Electric / Flying <br>Attack: 65 <br>Defense: 107 <br>Total: 520","Name: RotomFrost Rotom <br>Type: Electric / Ice <br>Attack: 65 <br>Defense: 107 <br>Total: 520","Name: RotomHeat Rotom <br>Type: Electric / Fire <br>Attack: 65 <br>Defense: 107 <br>Total: 520","Name: RotomMow Rotom <br>Type: Electric / Grass <br>Attack: 65 <br>Defense: 107 <br>Total: 520","Name: Shinx <br>Type: Electric  <br>Attack: 65 <br>Defense: 34 <br>Total: 263","Name: Tynamo <br>Type: Electric  <br>Attack: 55 <br>Defense: 40 <br>Total: 275","Name: Voltorb <br>Type: Electric  <br>Attack: 30 <br>Defense: 50 <br>Total: 330","Name: Zapdos <br>Type: Electric / Flying <br>Attack: 90 <br>Defense: 85 <br>Total: 580","Name: Zebstrika <br>Type: Electric  <br>Attack: 100 <br>Defense: 63 <br>Total: 497"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,208,48,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,208,48,1)"}},"hoveron":"points","name":"Electric","legendgroup":"Electric","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[72,70,45,25,38,45,65,120,80,80,52,48,65,50,20,40,131],"y":[72,73,48,28,39,47,68,75,86,50,60,66,65,95,65,85,95],"text":["Name: Aromatisse <br>Type: Fairy  <br>Attack: 72 <br>Defense: 72 <br>Total: 462","Name: Clefable <br>Type: Fairy  <br>Attack: 70 <br>Defense: 73 <br>Total: 483","Name: Clefairy <br>Type: Fairy  <br>Attack: 45 <br>Defense: 48 <br>Total: 323","Name: Cleffa <br>Type: Fairy  <br>Attack: 25 <br>Defense: 28 <br>Total: 218","Name: Flabébé <br>Type: Fairy  <br>Attack: 38 <br>Defense: 39 <br>Total: 303","Name: Floette <br>Type: Fairy  <br>Attack: 45 <br>Defense: 47 <br>Total: 371","Name: Florges <br>Type: Fairy  <br>Attack: 65 <br>Defense: 68 <br>Total: 552","Name: Granbull <br>Type: Fairy  <br>Attack: 120 <br>Defense: 75 <br>Total: 450","Name: Slurpuff <br>Type: Fairy  <br>Attack: 80 <br>Defense: 86 <br>Total: 480","Name: Snubbull <br>Type: Fairy  <br>Attack: 80 <br>Defense: 50 <br>Total: 300","Name: Spritzee <br>Type: Fairy  <br>Attack: 52 <br>Defense: 60 <br>Total: 341","Name: Swirlix <br>Type: Fairy  <br>Attack: 48 <br>Defense: 66 <br>Total: 341","Name: Sylveon <br>Type: Fairy  <br>Attack: 65 <br>Defense: 65 <br>Total: 525","Name: Togekiss <br>Type: Fairy / Flying <br>Attack: 50 <br>Defense: 95 <br>Total: 545","Name: Togepi <br>Type: Fairy  <br>Attack: 20 <br>Defense: 65 <br>Total: 245","Name: Togetic <br>Type: Fairy / Flying <br>Attack: 40 <br>Defense: 85 <br>Total: 405","Name: Xerneas <br>Type: Fairy  <br>Attack: 131 <br>Defense: 95 <br>Total: 680"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(238,153,172,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(238,153,172,1)"}},"hoveron":"points","name":"Fairy","legendgroup":"Fairy","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[140,105,120,92,105,120,95,110,130,100,80,60,80,60,40,85,125,82,124,105,70,125,100,80,35],"y":[95,85,60,75,79,53,95,70,80,70,50,30,35,75,55,50,60,62,78,60,40,75,85,55,35],"text":["Name: Conkeldurr <br>Type: Fighting  <br>Attack: 140 <br>Defense: 95 <br>Total: 505","Name: Gurdurr <br>Type: Fighting  <br>Attack: 105 <br>Defense: 85 <br>Total: 405","Name: Hariyama <br>Type: Fighting  <br>Attack: 120 <br>Defense: 60 <br>Total: 474","Name: Hawlucha <br>Type: Fighting / Flying <br>Attack: 92 <br>Defense: 75 <br>Total: 500","Name: Hitmonchan <br>Type: Fighting  <br>Attack: 105 <br>Defense: 79 <br>Total: 455","Name: Hitmonlee <br>Type: Fighting  <br>Attack: 120 <br>Defense: 53 <br>Total: 455","Name: Hitmontop <br>Type: Fighting  <br>Attack: 95 <br>Defense: 95 <br>Total: 455","Name: Lucario <br>Type: Fighting / Steel <br>Attack: 110 <br>Defense: 70 <br>Total: 525","Name: Machamp <br>Type: Fighting  <br>Attack: 130 <br>Defense: 80 <br>Total: 505","Name: Machoke <br>Type: Fighting  <br>Attack: 100 <br>Defense: 70 <br>Total: 405","Name: Machop <br>Type: Fighting  <br>Attack: 80 <br>Defense: 50 <br>Total: 305","Name: Makuhita <br>Type: Fighting  <br>Attack: 60 <br>Defense: 30 <br>Total: 237","Name: Mankey <br>Type: Fighting  <br>Attack: 80 <br>Defense: 35 <br>Total: 305","Name: Medicham <br>Type: Fighting / Psychic <br>Attack: 60 <br>Defense: 75 <br>Total: 410","Name: Meditite <br>Type: Fighting / Psychic <br>Attack: 40 <br>Defense: 55 <br>Total: 280","Name: Mienfoo <br>Type: Fighting  <br>Attack: 85 <br>Defense: 50 <br>Total: 350","Name: Mienshao <br>Type: Fighting  <br>Attack: 125 <br>Defense: 60 <br>Total: 510","Name: Pancham <br>Type: Fighting  <br>Attack: 82 <br>Defense: 62 <br>Total: 348","Name: Pangoro <br>Type: Fighting / Dark <br>Attack: 124 <br>Defense: 78 <br>Total: 495","Name: Primeape <br>Type: Fighting  <br>Attack: 105 <br>Defense: 60 <br>Total: 455","Name: Riolu <br>Type: Fighting  <br>Attack: 70 <br>Defense: 40 <br>Total: 285","Name: Sawk <br>Type: Fighting  <br>Attack: 125 <br>Defense: 75 <br>Total: 465","Name: Throh <br>Type: Fighting  <br>Attack: 100 <br>Defense: 85 <br>Total: 465","Name: Timburr <br>Type: Fighting  <br>Attack: 80 <br>Defense: 55 <br>Total: 305","Name: Tyrogue <br>Type: Fighting  <br>Attack: 35 <br>Defense: 35 <br>Total: 210"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(192,48,40,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(192,48,40,1)"}},"hoveron":"points","name":"Fighting","legendgroup":"Fighting","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[110,120,59,100,84,52,64,58,85,52,140,30,90,69,123,115,45,130,73,70,97,90,130,104,50,75,50,95,95,100,78,76,60,53,93,85,68,64,98,40,81,63,60,85,84,110,41],"y":[80,70,58,70,78,43,58,44,60,43,55,105,45,72,65,85,40,60,55,45,66,106,90,71,58,37,120,57,67,90,52,75,40,48,55,55,72,58,63,40,71,45,40,140,78,120,40],"text":["Name: Arcanine <br>Type: Fire  <br>Attack: 110 <br>Defense: 80 <br>Total: 555","Name: Blaziken <br>Type: Fire / Fighting <br>Attack: 120 <br>Defense: 70 <br>Total: 530","Name: Braixen <br>Type: Fire  <br>Attack: 59 <br>Defense: 58 <br>Total: 409","Name: Camerupt <br>Type: Fire / Ground <br>Attack: 100 <br>Defense: 70 <br>Total: 460","Name: Charizard <br>Type: Fire / Flying <br>Attack: 84 <br>Defense: 78 <br>Total: 534","Name: Charmander <br>Type: Fire  <br>Attack: 52 <br>Defense: 43 <br>Total: 309","Name: Charmeleon <br>Type: Fire  <br>Attack: 64 <br>Defense: 58 <br>Total: 405","Name: Chimchar <br>Type: Fire  <br>Attack: 58 <br>Defense: 44 <br>Total: 309","Name: Combusken <br>Type: Fire / Fighting <br>Attack: 85 <br>Defense: 60 <br>Total: 405","Name: Cyndaquil <br>Type: Fire  <br>Attack: 52 <br>Defense: 43 <br>Total: 309","Name: DarmanitanStandard Mode <br>Type: Fire  <br>Attack: 140 <br>Defense: 55 <br>Total: 480","Name: DarmanitanZen Mode <br>Type: Fire / Psychic <br>Attack: 30 <br>Defense: 105 <br>Total: 540","Name: Darumaka <br>Type: Fire  <br>Attack: 90 <br>Defense: 45 <br>Total: 315","Name: Delphox <br>Type: Fire / Psychic <br>Attack: 69 <br>Defense: 72 <br>Total: 534","Name: Emboar <br>Type: Fire / Fighting <br>Attack: 123 <br>Defense: 65 <br>Total: 528","Name: Entei <br>Type: Fire  <br>Attack: 115 <br>Defense: 85 <br>Total: 580","Name: Fennekin <br>Type: Fire  <br>Attack: 45 <br>Defense: 40 <br>Total: 307","Name: Flareon <br>Type: Fire  <br>Attack: 130 <br>Defense: 60 <br>Total: 525","Name: Fletchinder <br>Type: Fire / Flying <br>Attack: 73 <br>Defense: 55 <br>Total: 382","Name: Growlithe <br>Type: Fire  <br>Attack: 70 <br>Defense: 45 <br>Total: 350","Name: Heatmor <br>Type: Fire  <br>Attack: 97 <br>Defense: 66 <br>Total: 484","Name: Heatran <br>Type: Fire / Steel <br>Attack: 90 <br>Defense: 106 <br>Total: 600","Name: Ho-oh <br>Type: Fire / Flying <br>Attack: 130 <br>Defense: 90 <br>Total: 680","Name: Infernape <br>Type: Fire / Fighting <br>Attack: 104 <br>Defense: 71 <br>Total: 534","Name: Litleo <br>Type: Fire / Normal <br>Attack: 50 <br>Defense: 58 <br>Total: 369","Name: Magby <br>Type: Fire  <br>Attack: 75 <br>Defense: 37 <br>Total: 365","Name: Magcargo <br>Type: Fire / Rock <br>Attack: 50 <br>Defense: 120 <br>Total: 410","Name: Magmar <br>Type: Fire  <br>Attack: 95 <br>Defense: 57 <br>Total: 495","Name: Magmortar <br>Type: Fire  <br>Attack: 95 <br>Defense: 67 <br>Total: 540","Name: Moltres <br>Type: Fire / Flying <br>Attack: 100 <br>Defense: 90 <br>Total: 580","Name: Monferno <br>Type: Fire / Fighting <br>Attack: 78 <br>Defense: 52 <br>Total: 405","Name: Ninetales <br>Type: Fire  <br>Attack: 76 <br>Defense: 75 <br>Total: 505","Name: Numel <br>Type: Fire / Ground <br>Attack: 60 <br>Defense: 40 <br>Total: 305","Name: Pansear <br>Type: Fire  <br>Attack: 53 <br>Defense: 48 <br>Total: 316","Name: Pignite <br>Type: Fire / Fighting <br>Attack: 93 <br>Defense: 55 <br>Total: 418","Name: Ponyta <br>Type: Fire  <br>Attack: 85 <br>Defense: 55 <br>Total: 410","Name: Pyroar <br>Type: Fire / Normal <br>Attack: 68 <br>Defense: 72 <br>Total: 507","Name: Quilava <br>Type: Fire  <br>Attack: 64 <br>Defense: 58 <br>Total: 405","Name: Simisear <br>Type: Fire  <br>Attack: 98 <br>Defense: 63 <br>Total: 498","Name: Slugma <br>Type: Fire  <br>Attack: 40 <br>Defense: 40 <br>Total: 250","Name: Talonflame <br>Type: Fire / Flying <br>Attack: 81 <br>Defense: 71 <br>Total: 499","Name: Tepig <br>Type: Fire  <br>Attack: 63 <br>Defense: 45 <br>Total: 308","Name: Torchic <br>Type: Fire  <br>Attack: 60 <br>Defense: 40 <br>Total: 310","Name: Torkoal <br>Type: Fire  <br>Attack: 85 <br>Defense: 140 <br>Total: 470","Name: Typhlosion <br>Type: Fire  <br>Attack: 84 <br>Defense: 78 <br>Total: 534","Name: Volcanion <br>Type: Fire / Water <br>Attack: 110 <br>Defense: 120 <br>Total: 600","Name: Vulpix <br>Type: Fire  <br>Attack: 41 <br>Defense: 40 <br>Total: 299"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(240,128,48,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(240,128,48,1)"}},"hoveron":"points","name":"Fire","legendgroup":"Fire","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[30,70],"y":[35,80],"text":["Name: Noibat <br>Type: Flying / Dragon <br>Attack: 30 <br>Defense: 35 <br>Total: 245","Name: Noivern <br>Type: Flying / Dragon <br>Attack: 70 <br>Defense: 80 <br>Total: 535"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(168,144,240,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(168,144,240,1)"}},"hoveron":"points","name":"Flying","legendgroup":"Flying","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[115,55,50,80,50,70,100,40,35,65,90,95,85,100,50,40,30,60,60,70,66,66,66,66,75,92,110,30],"y":[65,90,145,44,34,130,135,90,30,60,122,122,122,122,45,60,55,60,60,48,70,70,70,70,35,108,76,85],"text":["Name: Banette <br>Type: Ghost  <br>Attack: 115 <br>Defense: 65 <br>Total: 455","Name: Chandelure <br>Type: Ghost / Fire <br>Attack: 55 <br>Defense: 90 <br>Total: 520","Name: Cofagrigus <br>Type: Ghost  <br>Attack: 50 <br>Defense: 145 <br>Total: 483","Name: Drifblim <br>Type: Ghost / Flying <br>Attack: 80 <br>Defense: 44 <br>Total: 498","Name: Drifloon <br>Type: Ghost / Flying <br>Attack: 50 <br>Defense: 34 <br>Total: 348","Name: Dusclops <br>Type: Ghost  <br>Attack: 70 <br>Defense: 130 <br>Total: 455","Name: Dusknoir <br>Type: Ghost  <br>Attack: 100 <br>Defense: 135 <br>Total: 525","Name: Duskull <br>Type: Ghost  <br>Attack: 40 <br>Defense: 90 <br>Total: 295","Name: Gastly <br>Type: Ghost / Poison <br>Attack: 35 <br>Defense: 30 <br>Total: 310","Name: Gengar <br>Type: Ghost / Poison <br>Attack: 65 <br>Defense: 60 <br>Total: 500","Name: GourgeistAverage Size <br>Type: Ghost / Grass <br>Attack: 90 <br>Defense: 122 <br>Total: 494","Name: GourgeistLarge Size <br>Type: Ghost / Grass <br>Attack: 95 <br>Defense: 122 <br>Total: 494","Name: GourgeistSmall Size <br>Type: Ghost / Grass <br>Attack: 85 <br>Defense: 122 <br>Total: 494","Name: GourgeistSuper Size <br>Type: Ghost / Grass <br>Attack: 100 <br>Defense: 122 <br>Total: 494","Name: Haunter <br>Type: Ghost / Poison <br>Attack: 50 <br>Defense: 45 <br>Total: 405","Name: Lampent <br>Type: Ghost / Fire <br>Attack: 40 <br>Defense: 60 <br>Total: 370","Name: Litwick <br>Type: Ghost / Fire <br>Attack: 30 <br>Defense: 55 <br>Total: 275","Name: Misdreavus <br>Type: Ghost  <br>Attack: 60 <br>Defense: 60 <br>Total: 435","Name: Mismagius <br>Type: Ghost  <br>Attack: 60 <br>Defense: 60 <br>Total: 495","Name: Phantump <br>Type: Ghost / Grass <br>Attack: 70 <br>Defense: 48 <br>Total: 309","Name: PumpkabooAverage Size <br>Type: Ghost / Grass <br>Attack: 66 <br>Defense: 70 <br>Total: 335","Name: PumpkabooLarge Size <br>Type: Ghost / Grass <br>Attack: 66 <br>Defense: 70 <br>Total: 335","Name: PumpkabooSmall Size <br>Type: Ghost / Grass <br>Attack: 66 <br>Defense: 70 <br>Total: 335","Name: PumpkabooSuper Size <br>Type: Ghost / Grass <br>Attack: 66 <br>Defense: 70 <br>Total: 335","Name: Shuppet <br>Type: Ghost  <br>Attack: 75 <br>Defense: 35 <br>Total: 295","Name: Spiritomb <br>Type: Ghost / Dark <br>Attack: 92 <br>Defense: 108 <br>Total: 485","Name: Trevenant <br>Type: Ghost / Grass <br>Attack: 110 <br>Defense: 76 <br>Total: 474","Name: Yamask <br>Type: Ghost  <br>Attack: 30 <br>Defense: 85 <br>Total: 303"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(112,88,152,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(112,88,152,1)"}},"hoveron":"points","name":"Ghost","legendgroup":"Ghost","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[92,85,62,80,75,130,30,49,85,115,100,60,35,107,61,49,27,40,95,50,94,55,65,100,89,65,35,62,55,110,60,86,70,50,53,35,78,60,70,85,40,75,60,100,40,98,65,45,45,62,75,30,55,100,109,45,68,68,82,105,80,90,90,67],"y":[75,70,80,95,35,80,35,49,40,60,72,70,45,122,65,65,60,80,85,91,131,45,70,62,85,45,40,63,70,130,75,67,40,55,48,50,95,45,65,65,50,95,75,60,60,63,48,50,55,50,55,30,115,125,105,35,83,64,83,65,85,72,50,85],"text":["Name: Abomasnow <br>Type: Grass / Ice <br>Attack: 92 <br>Defense: 75 <br>Total: 494","Name: Amoonguss <br>Type: Grass / Poison <br>Attack: 85 <br>Defense: 70 <br>Total: 464","Name: Bayleef <br>Type: Grass  <br>Attack: 62 <br>Defense: 80 <br>Total: 405","Name: Bellossom <br>Type: Grass  <br>Attack: 80 <br>Defense: 95 <br>Total: 490","Name: Bellsprout <br>Type: Grass / Poison <br>Attack: 75 <br>Defense: 35 <br>Total: 300","Name: Breloom <br>Type: Grass / Fighting <br>Attack: 130 <br>Defense: 80 <br>Total: 460","Name: Budew <br>Type: Grass / Poison <br>Attack: 30 <br>Defense: 35 <br>Total: 280","Name: Bulbasaur <br>Type: Grass / Poison <br>Attack: 49 <br>Defense: 49 <br>Total: 318","Name: Cacnea <br>Type: Grass  <br>Attack: 85 <br>Defense: 40 <br>Total: 335","Name: Cacturne <br>Type: Grass / Dark <br>Attack: 115 <br>Defense: 60 <br>Total: 475","Name: Carnivine <br>Type: Grass  <br>Attack: 100 <br>Defense: 72 <br>Total: 454","Name: Cherrim <br>Type: Grass  <br>Attack: 60 <br>Defense: 70 <br>Total: 450","Name: Cherubi <br>Type: Grass  <br>Attack: 35 <br>Defense: 45 <br>Total: 275","Name: Chesnaught <br>Type: Grass / Fighting <br>Attack: 107 <br>Defense: 122 <br>Total: 530","Name: Chespin <br>Type: Grass  <br>Attack: 61 <br>Defense: 65 <br>Total: 313","Name: Chikorita <br>Type: Grass  <br>Attack: 49 <br>Defense: 65 <br>Total: 318","Name: Cottonee <br>Type: Grass / Fairy <br>Attack: 27 <br>Defense: 60 <br>Total: 280","Name: Exeggcute <br>Type: Grass / Psychic <br>Attack: 40 <br>Defense: 80 <br>Total: 325","Name: Exeggutor <br>Type: Grass / Psychic <br>Attack: 95 <br>Defense: 85 <br>Total: 520","Name: Ferroseed <br>Type: Grass / Steel <br>Attack: 50 <br>Defense: 91 <br>Total: 305","Name: Ferrothorn <br>Type: Grass / Steel <br>Attack: 94 <br>Defense: 131 <br>Total: 489","Name: Foongus <br>Type: Grass / Poison <br>Attack: 55 <br>Defense: 45 <br>Total: 294","Name: Gloom <br>Type: Grass / Poison <br>Attack: 65 <br>Defense: 70 <br>Total: 395","Name: Gogoat <br>Type: Grass  <br>Attack: 100 <br>Defense: 62 <br>Total: 531","Name: Grotle <br>Type: Grass  <br>Attack: 89 <br>Defense: 85 <br>Total: 405","Name: Grovyle <br>Type: Grass  <br>Attack: 65 <br>Defense: 45 <br>Total: 405","Name: Hoppip <br>Type: Grass / Flying <br>Attack: 35 <br>Defense: 40 <br>Total: 250","Name: Ivysaur <br>Type: Grass / Poison <br>Attack: 62 <br>Defense: 63 <br>Total: 405","Name: Jumpluff <br>Type: Grass / Flying <br>Attack: 55 <br>Defense: 70 <br>Total: 460","Name: Leafeon <br>Type: Grass  <br>Attack: 110 <br>Defense: 130 <br>Total: 525","Name: Lilligant <br>Type: Grass  <br>Attack: 60 <br>Defense: 75 <br>Total: 480","Name: Maractus <br>Type: Grass  <br>Attack: 86 <br>Defense: 67 <br>Total: 461","Name: Nuzleaf <br>Type: Grass / Dark <br>Attack: 70 <br>Defense: 40 <br>Total: 340","Name: Oddish <br>Type: Grass / Poison <br>Attack: 50 <br>Defense: 55 <br>Total: 320","Name: Pansage <br>Type: Grass  <br>Attack: 53 <br>Defense: 48 <br>Total: 316","Name: Petilil <br>Type: Grass  <br>Attack: 35 <br>Defense: 50 <br>Total: 280","Name: Quilladin <br>Type: Grass  <br>Attack: 78 <br>Defense: 95 <br>Total: 405","Name: Roselia <br>Type: Grass / Poison <br>Attack: 60 <br>Defense: 45 <br>Total: 400","Name: Roserade <br>Type: Grass / Poison <br>Attack: 70 <br>Defense: 65 <br>Total: 515","Name: Sceptile <br>Type: Grass  <br>Attack: 85 <br>Defense: 65 <br>Total: 530","Name: Seedot <br>Type: Grass  <br>Attack: 40 <br>Defense: 50 <br>Total: 220","Name: Serperior <br>Type: Grass  <br>Attack: 75 <br>Defense: 95 <br>Total: 528","Name: Servine <br>Type: Grass  <br>Attack: 60 <br>Defense: 75 <br>Total: 413","Name: Shiftry <br>Type: Grass / Dark <br>Attack: 100 <br>Defense: 60 <br>Total: 480","Name: Shroomish <br>Type: Grass  <br>Attack: 40 <br>Defense: 60 <br>Total: 295","Name: Simisage <br>Type: Grass  <br>Attack: 98 <br>Defense: 63 <br>Total: 498","Name: Skiddo <br>Type: Grass  <br>Attack: 65 <br>Defense: 48 <br>Total: 350","Name: Skiploom <br>Type: Grass / Flying <br>Attack: 45 <br>Defense: 50 <br>Total: 340","Name: Snivy <br>Type: Grass  <br>Attack: 45 <br>Defense: 55 <br>Total: 308","Name: Snover <br>Type: Grass / Ice <br>Attack: 62 <br>Defense: 50 <br>Total: 334","Name: Sunflora <br>Type: Grass  <br>Attack: 75 <br>Defense: 55 <br>Total: 425","Name: Sunkern <br>Type: Grass  <br>Attack: 30 <br>Defense: 30 <br>Total: 180","Name: Tangela <br>Type: Grass  <br>Attack: 55 <br>Defense: 115 <br>Total: 435","Name: Tangrowth <br>Type: Grass  <br>Attack: 100 <br>Defense: 125 <br>Total: 535","Name: Torterra <br>Type: Grass / Ground <br>Attack: 109 <br>Defense: 105 <br>Total: 525","Name: Treecko <br>Type: Grass  <br>Attack: 45 <br>Defense: 35 <br>Total: 310","Name: Tropius <br>Type: Grass / Flying <br>Attack: 68 <br>Defense: 83 <br>Total: 460","Name: Turtwig <br>Type: Grass  <br>Attack: 68 <br>Defense: 64 <br>Total: 318","Name: Venusaur <br>Type: Grass / Poison <br>Attack: 82 <br>Defense: 83 <br>Total: 525","Name: Victreebel <br>Type: Grass / Poison <br>Attack: 105 <br>Defense: 65 <br>Total: 490","Name: Vileplume <br>Type: Grass / Poison <br>Attack: 80 <br>Defense: 85 <br>Total: 490","Name: Virizion <br>Type: Grass / Fighting <br>Attack: 90 <br>Defense: 72 <br>Total: 580","Name: Weepinbell <br>Type: Grass / Poison <br>Attack: 90 <br>Defense: 50 <br>Total: 390","Name: Whimsicott <br>Type: Grass / Fairy <br>Attack: 67 <br>Defense: 85 <br>Total: 480"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(120,200,80,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(120,200,80,1)"}},"hoveron":"points","name":"Grass","legendgroup":"Grass","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[40,70,50,55,120,85,80,135,100,75,95,74,124,150,72,112,82,117,80,60,130,85,140,72,75,66,100,70],"y":[55,105,95,25,120,40,50,60,80,105,125,50,80,140,78,118,45,80,110,60,120,95,130,35,85,84,45,50],"text":["Name: Baltoy <br>Type: Ground / Psychic <br>Attack: 40 <br>Defense: 55 <br>Total: 300","Name: Claydol <br>Type: Ground / Psychic <br>Attack: 70 <br>Defense: 105 <br>Total: 500","Name: Cubone <br>Type: Ground  <br>Attack: 50 <br>Defense: 95 <br>Total: 320","Name: Diglett <br>Type: Ground  <br>Attack: 55 <br>Defense: 25 <br>Total: 265","Name: Donphan <br>Type: Ground  <br>Attack: 120 <br>Defense: 120 <br>Total: 500","Name: Drilbur <br>Type: Ground  <br>Attack: 85 <br>Defense: 40 <br>Total: 328","Name: Dugtrio <br>Type: Ground  <br>Attack: 80 <br>Defense: 50 <br>Total: 405","Name: Excadrill <br>Type: Ground / Steel <br>Attack: 135 <br>Defense: 60 <br>Total: 508","Name: Flygon <br>Type: Ground / Dragon <br>Attack: 100 <br>Defense: 80 <br>Total: 520","Name: Gligar <br>Type: Ground / Flying <br>Attack: 75 <br>Defense: 105 <br>Total: 430","Name: Gliscor <br>Type: Ground / Flying <br>Attack: 95 <br>Defense: 125 <br>Total: 510","Name: Golett <br>Type: Ground / Ghost <br>Attack: 74 <br>Defense: 50 <br>Total: 303","Name: Golurk <br>Type: Ground / Ghost <br>Attack: 124 <br>Defense: 80 <br>Total: 483","Name: Groudon <br>Type: Ground  <br>Attack: 150 <br>Defense: 140 <br>Total: 670","Name: Hippopotas <br>Type: Ground  <br>Attack: 72 <br>Defense: 78 <br>Total: 330","Name: Hippowdon <br>Type: Ground  <br>Attack: 112 <br>Defense: 118 <br>Total: 525","Name: Krokorok <br>Type: Ground / Dark <br>Attack: 82 <br>Defense: 45 <br>Total: 351","Name: Krookodile <br>Type: Ground / Dark <br>Attack: 117 <br>Defense: 80 <br>Total: 519","Name: Marowak <br>Type: Ground  <br>Attack: 80 <br>Defense: 110 <br>Total: 425","Name: Phanpy <br>Type: Ground  <br>Attack: 60 <br>Defense: 60 <br>Total: 330","Name: Rhydon <br>Type: Ground / Rock <br>Attack: 130 <br>Defense: 120 <br>Total: 485","Name: Rhyhorn <br>Type: Ground / Rock <br>Attack: 85 <br>Defense: 95 <br>Total: 345","Name: Rhyperior <br>Type: Ground / Rock <br>Attack: 140 <br>Defense: 130 <br>Total: 535","Name: Sandile <br>Type: Ground / Dark <br>Attack: 72 <br>Defense: 35 <br>Total: 292","Name: Sandshrew <br>Type: Ground  <br>Attack: 75 <br>Defense: 85 <br>Total: 300","Name: Stunfisk <br>Type: Ground / Electric <br>Attack: 66 <br>Defense: 84 <br>Total: 471","Name: Trapinch <br>Type: Ground  <br>Attack: 100 <br>Defense: 45 <br>Total: 290","Name: Vibrava <br>Type: Ground / Dragon <br>Attack: 70 <br>Defense: 50 <br>Total: 340"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(224,192,104,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(224,192,104,1)"}},"hoveron":"points","name":"Ground","legendgroup":"Ground","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[85,117,110,69,50,70,55,80,60,80,50,130,100,50,60,30,50,40,50,65,50,95,80],"y":[100,184,80,85,30,40,45,70,110,80,35,80,80,100,70,15,50,50,40,65,50,85,90],"text":["Name: Articuno <br>Type: Ice / Flying <br>Attack: 85 <br>Defense: 100 <br>Total: 580","Name: Avalugg <br>Type: Ice  <br>Attack: 117 <br>Defense: 184 <br>Total: 514","Name: Beartic <br>Type: Ice  <br>Attack: 110 <br>Defense: 80 <br>Total: 485","Name: Bergmite <br>Type: Ice  <br>Attack: 69 <br>Defense: 85 <br>Total: 304","Name: Cryogonal <br>Type: Ice  <br>Attack: 50 <br>Defense: 30 <br>Total: 485","Name: Cubchoo <br>Type: Ice  <br>Attack: 70 <br>Defense: 40 <br>Total: 305","Name: Delibird <br>Type: Ice / Flying <br>Attack: 55 <br>Defense: 45 <br>Total: 330","Name: Froslass <br>Type: Ice / Ghost <br>Attack: 80 <br>Defense: 70 <br>Total: 480","Name: Glaceon <br>Type: Ice  <br>Attack: 60 <br>Defense: 110 <br>Total: 525","Name: Glalie <br>Type: Ice  <br>Attack: 80 <br>Defense: 80 <br>Total: 480","Name: Jynx <br>Type: Ice / Psychic <br>Attack: 50 <br>Defense: 35 <br>Total: 455","Name: Mamoswine <br>Type: Ice / Ground <br>Attack: 130 <br>Defense: 80 <br>Total: 530","Name: Piloswine <br>Type: Ice / Ground <br>Attack: 100 <br>Defense: 80 <br>Total: 450","Name: Regice <br>Type: Ice  <br>Attack: 50 <br>Defense: 100 <br>Total: 580","Name: Sealeo <br>Type: Ice / Water <br>Attack: 60 <br>Defense: 70 <br>Total: 410","Name: Smoochum <br>Type: Ice / Psychic <br>Attack: 30 <br>Defense: 15 <br>Total: 305","Name: Snorunt <br>Type: Ice  <br>Attack: 50 <br>Defense: 50 <br>Total: 300","Name: Spheal <br>Type: Ice / Water <br>Attack: 40 <br>Defense: 50 <br>Total: 290","Name: Swinub <br>Type: Ice / Ground <br>Attack: 50 <br>Defense: 40 <br>Total: 250","Name: Vanillish <br>Type: Ice  <br>Attack: 65 <br>Defense: 65 <br>Total: 395","Name: Vanillite <br>Type: Ice  <br>Attack: 50 <br>Defense: 50 <br>Total: 305","Name: Vanilluxe <br>Type: Ice  <br>Attack: 95 <br>Defense: 85 <br>Total: 535","Name: Walrein <br>Type: Ice / Water <br>Attack: 80 <br>Defense: 90 <br>Total: 530"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(152,216,216,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(152,216,216,1)"}},"hoveron":"points","name":"Ice","legendgroup":"Ice","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[70,100,120,60,20,85,45,10,110,123,66,36,70,5,65,95,60,65,56,48,110,85,70,55,91,65,90,50,80,76,80,55,5,80,30,30,45,95,90,85,55,60,70,76,71,45,80,50,85,50,55,70,80,60,45,55,60,80,80,82,81,56,160,83,100,46,45,160,60,20,110,60,60,95,120,75,55,110,40,85,55,100,80,77,115,130,80,85,51,70,115,30],"y":[55,66,120,86,40,60,40,10,95,75,44,38,70,5,45,60,50,65,77,48,70,45,70,50,63,55,65,43,60,64,65,42,5,65,30,15,20,80,70,95,75,45,61,84,43,35,105,40,40,50,39,60,75,55,40,50,70,70,90,64,60,35,110,50,70,34,45,100,60,35,65,30,60,62,70,50,30,90,60,60,30,95,50,62,80,75,80,69,23,45,60,41],"text":["Name: Aipom <br>Type: Normal  <br>Attack: 70 <br>Defense: 55 <br>Total: 360","Name: Ambipom <br>Type: Normal  <br>Attack: 100 <br>Defense: 66 <br>Total: 482","Name: Arceus <br>Type: Normal  <br>Attack: 120 <br>Defense: 120 <br>Total: 720","Name: Audino <br>Type: Normal  <br>Attack: 60 <br>Defense: 86 <br>Total: 445","Name: Azurill <br>Type: Normal / Fairy <br>Attack: 20 <br>Defense: 40 <br>Total: 190","Name: Bibarel <br>Type: Normal / Water <br>Attack: 85 <br>Defense: 60 <br>Total: 410","Name: Bidoof <br>Type: Normal  <br>Attack: 45 <br>Defense: 40 <br>Total: 250","Name: Blissey <br>Type: Normal  <br>Attack: 10 <br>Defense: 10 <br>Total: 540","Name: Bouffalant <br>Type: Normal  <br>Attack: 110 <br>Defense: 95 <br>Total: 490","Name: Braviary <br>Type: Normal / Flying <br>Attack: 123 <br>Defense: 75 <br>Total: 510","Name: Buneary <br>Type: Normal  <br>Attack: 66 <br>Defense: 44 <br>Total: 350","Name: Bunnelby <br>Type: Normal  <br>Attack: 36 <br>Defense: 38 <br>Total: 237","Name: Castform <br>Type: Normal  <br>Attack: 70 <br>Defense: 70 <br>Total: 420","Name: Chansey <br>Type: Normal  <br>Attack: 5 <br>Defense: 5 <br>Total: 450","Name: Chatot <br>Type: Normal / Flying <br>Attack: 65 <br>Defense: 45 <br>Total: 411","Name: Cinccino <br>Type: Normal  <br>Attack: 95 <br>Defense: 60 <br>Total: 470","Name: Deerling <br>Type: Normal / Grass <br>Attack: 60 <br>Defense: 50 <br>Total: 335","Name: Delcatty <br>Type: Normal  <br>Attack: 65 <br>Defense: 65 <br>Total: 380","Name: Diggersby <br>Type: Normal / Ground <br>Attack: 56 <br>Defense: 77 <br>Total: 423","Name: Ditto <br>Type: Normal  <br>Attack: 48 <br>Defense: 48 <br>Total: 288","Name: Dodrio <br>Type: Normal / Flying <br>Attack: 110 <br>Defense: 70 <br>Total: 460","Name: Doduo <br>Type: Normal / Flying <br>Attack: 85 <br>Defense: 45 <br>Total: 310","Name: Dunsparce <br>Type: Normal  <br>Attack: 70 <br>Defense: 70 <br>Total: 415","Name: Eevee <br>Type: Normal  <br>Attack: 55 <br>Defense: 50 <br>Total: 325","Name: Exploud <br>Type: Normal  <br>Attack: 91 <br>Defense: 63 <br>Total: 490","Name: Farfetch'd <br>Type: Normal / Flying <br>Attack: 65 <br>Defense: 55 <br>Total: 352","Name: Fearow <br>Type: Normal / Flying <br>Attack: 90 <br>Defense: 65 <br>Total: 442","Name: Fletchling <br>Type: Normal / Flying <br>Attack: 50 <br>Defense: 43 <br>Total: 278","Name: Furfrou <br>Type: Normal  <br>Attack: 80 <br>Defense: 60 <br>Total: 472","Name: Furret <br>Type: Normal  <br>Attack: 76 <br>Defense: 64 <br>Total: 415","Name: Girafarig <br>Type: Normal / Psychic <br>Attack: 80 <br>Defense: 65 <br>Total: 455","Name: Glameow <br>Type: Normal  <br>Attack: 55 <br>Defense: 42 <br>Total: 310","Name: Happiny <br>Type: Normal  <br>Attack: 5 <br>Defense: 5 <br>Total: 220","Name: Herdier <br>Type: Normal  <br>Attack: 80 <br>Defense: 65 <br>Total: 370","Name: Hoothoot <br>Type: Normal / Flying <br>Attack: 30 <br>Defense: 30 <br>Total: 262","Name: Igglybuff <br>Type: Normal / Fairy <br>Attack: 30 <br>Defense: 15 <br>Total: 210","Name: Jigglypuff <br>Type: Normal / Fairy <br>Attack: 45 <br>Defense: 20 <br>Total: 270","Name: Kangaskhan <br>Type: Normal  <br>Attack: 95 <br>Defense: 80 <br>Total: 490","Name: Kecleon <br>Type: Normal  <br>Attack: 90 <br>Defense: 70 <br>Total: 440","Name: Lickilicky <br>Type: Normal  <br>Attack: 85 <br>Defense: 95 <br>Total: 515","Name: Lickitung <br>Type: Normal  <br>Attack: 55 <br>Defense: 75 <br>Total: 385","Name: Lillipup <br>Type: Normal  <br>Attack: 60 <br>Defense: 45 <br>Total: 275","Name: Linoone <br>Type: Normal  <br>Attack: 70 <br>Defense: 61 <br>Total: 420","Name: Lopunny <br>Type: Normal  <br>Attack: 76 <br>Defense: 84 <br>Total: 480","Name: Loudred <br>Type: Normal  <br>Attack: 71 <br>Defense: 43 <br>Total: 360","Name: Meowth <br>Type: Normal  <br>Attack: 45 <br>Defense: 35 <br>Total: 290","Name: Miltank <br>Type: Normal  <br>Attack: 80 <br>Defense: 105 <br>Total: 490","Name: Minccino <br>Type: Normal  <br>Attack: 50 <br>Defense: 40 <br>Total: 300","Name: Munchlax <br>Type: Normal  <br>Attack: 85 <br>Defense: 40 <br>Total: 390","Name: Noctowl <br>Type: Normal / Flying <br>Attack: 50 <br>Defense: 50 <br>Total: 442","Name: Patrat <br>Type: Normal  <br>Attack: 55 <br>Defense: 39 <br>Total: 255","Name: Persian <br>Type: Normal  <br>Attack: 70 <br>Defense: 60 <br>Total: 440","Name: Pidgeot <br>Type: Normal / Flying <br>Attack: 80 <br>Defense: 75 <br>Total: 479","Name: Pidgeotto <br>Type: Normal / Flying <br>Attack: 60 <br>Defense: 55 <br>Total: 349","Name: Pidgey <br>Type: Normal / Flying <br>Attack: 45 <br>Defense: 40 <br>Total: 251","Name: Pidove <br>Type: Normal / Flying <br>Attack: 55 <br>Defense: 50 <br>Total: 264","Name: Porygon <br>Type: Normal  <br>Attack: 60 <br>Defense: 70 <br>Total: 395","Name: Porygon-Z <br>Type: Normal  <br>Attack: 80 <br>Defense: 70 <br>Total: 535","Name: Porygon2 <br>Type: Normal  <br>Attack: 80 <br>Defense: 90 <br>Total: 515","Name: Purugly <br>Type: Normal  <br>Attack: 82 <br>Defense: 64 <br>Total: 452","Name: Raticate <br>Type: Normal  <br>Attack: 81 <br>Defense: 60 <br>Total: 413","Name: Rattata <br>Type: Normal  <br>Attack: 56 <br>Defense: 35 <br>Total: 253","Name: Regigigas <br>Type: Normal  <br>Attack: 160 <br>Defense: 110 <br>Total: 670","Name: Rufflet <br>Type: Normal / Flying <br>Attack: 83 <br>Defense: 50 <br>Total: 350","Name: Sawsbuck <br>Type: Normal / Grass <br>Attack: 100 <br>Defense: 70 <br>Total: 475","Name: Sentret <br>Type: Normal  <br>Attack: 46 <br>Defense: 34 <br>Total: 215","Name: Skitty <br>Type: Normal  <br>Attack: 45 <br>Defense: 45 <br>Total: 260","Name: Slaking <br>Type: Normal  <br>Attack: 160 <br>Defense: 100 <br>Total: 670","Name: Slakoth <br>Type: Normal  <br>Attack: 60 <br>Defense: 60 <br>Total: 280","Name: Smeargle <br>Type: Normal  <br>Attack: 20 <br>Defense: 35 <br>Total: 250","Name: Snorlax <br>Type: Normal  <br>Attack: 110 <br>Defense: 65 <br>Total: 540","Name: Spearow <br>Type: Normal / Flying <br>Attack: 60 <br>Defense: 30 <br>Total: 262","Name: Spinda <br>Type: Normal  <br>Attack: 60 <br>Defense: 60 <br>Total: 360","Name: Stantler <br>Type: Normal  <br>Attack: 95 <br>Defense: 62 <br>Total: 465","Name: Staraptor <br>Type: Normal / Flying <br>Attack: 120 <br>Defense: 70 <br>Total: 485","Name: Staravia <br>Type: Normal / Flying <br>Attack: 75 <br>Defense: 50 <br>Total: 340","Name: Starly <br>Type: Normal / Flying <br>Attack: 55 <br>Defense: 30 <br>Total: 245","Name: Stoutland <br>Type: Normal  <br>Attack: 110 <br>Defense: 90 <br>Total: 500","Name: Swablu <br>Type: Normal / Flying <br>Attack: 40 <br>Defense: 60 <br>Total: 310","Name: Swellow <br>Type: Normal / Flying <br>Attack: 85 <br>Defense: 60 <br>Total: 430","Name: Taillow <br>Type: Normal / Flying <br>Attack: 55 <br>Defense: 30 <br>Total: 270","Name: Tauros <br>Type: Normal  <br>Attack: 100 <br>Defense: 95 <br>Total: 490","Name: Teddiursa <br>Type: Normal  <br>Attack: 80 <br>Defense: 50 <br>Total: 330","Name: Tranquill <br>Type: Normal / Flying <br>Attack: 77 <br>Defense: 62 <br>Total: 358","Name: Unfezant <br>Type: Normal / Flying <br>Attack: 115 <br>Defense: 80 <br>Total: 488","Name: Ursaring <br>Type: Normal  <br>Attack: 130 <br>Defense: 75 <br>Total: 500","Name: Vigoroth <br>Type: Normal  <br>Attack: 80 <br>Defense: 80 <br>Total: 440","Name: Watchog <br>Type: Normal  <br>Attack: 85 <br>Defense: 69 <br>Total: 420","Name: Whismur <br>Type: Normal  <br>Attack: 51 <br>Defense: 23 <br>Total: 240","Name: Wigglytuff <br>Type: Normal / Fairy <br>Attack: 70 <br>Defense: 45 <br>Total: 435","Name: Zangoose <br>Type: Normal  <br>Attack: 115 <br>Defense: 60 <br>Total: 458","Name: Zigzagoon <br>Type: Normal  <br>Attack: 30 <br>Defense: 41 <br>Total: 240"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(168,168,120,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(168,168,120,1)"}},"hoveron":"points","name":"Normal","legendgroup":"Normal","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[85,61,90,75,90,60,95,80,80,43,65,105,102,92,47,57,62,72,100,50,60,93,63,73,106,50,90,45],"y":[69,40,80,90,110,44,82,70,50,53,95,75,77,87,52,40,67,57,60,90,60,67,47,83,65,62,120,35],"text":["Name: Arbok <br>Type: Poison  <br>Attack: 85 <br>Defense: 69 <br>Total: 438","Name: Croagunk <br>Type: Poison / Fighting <br>Attack: 61 <br>Defense: 40 <br>Total: 300","Name: Crobat <br>Type: Poison / Flying <br>Attack: 90 <br>Defense: 80 <br>Total: 535","Name: Dragalge <br>Type: Poison / Dragon <br>Attack: 75 <br>Defense: 90 <br>Total: 494","Name: Drapion <br>Type: Poison / Dark <br>Attack: 90 <br>Defense: 110 <br>Total: 500","Name: Ekans <br>Type: Poison  <br>Attack: 60 <br>Defense: 44 <br>Total: 288","Name: Garbodor <br>Type: Poison  <br>Attack: 95 <br>Defense: 82 <br>Total: 474","Name: Golbat <br>Type: Poison / Flying <br>Attack: 80 <br>Defense: 70 <br>Total: 455","Name: Grimer <br>Type: Poison  <br>Attack: 80 <br>Defense: 50 <br>Total: 325","Name: Gulpin <br>Type: Poison  <br>Attack: 43 <br>Defense: 53 <br>Total: 302","Name: Koffing <br>Type: Poison  <br>Attack: 65 <br>Defense: 95 <br>Total: 340","Name: Muk <br>Type: Poison  <br>Attack: 105 <br>Defense: 75 <br>Total: 500","Name: Nidoking <br>Type: Poison / Ground <br>Attack: 102 <br>Defense: 77 <br>Total: 505","Name: Nidoqueen <br>Type: Poison / Ground <br>Attack: 92 <br>Defense: 87 <br>Total: 505","Name: Nidoran♀ <br>Type: Poison  <br>Attack: 47 <br>Defense: 52 <br>Total: 275","Name: Nidoran♂ <br>Type: Poison  <br>Attack: 57 <br>Defense: 40 <br>Total: 273","Name: Nidorina <br>Type: Poison  <br>Attack: 62 <br>Defense: 67 <br>Total: 365","Name: Nidorino <br>Type: Poison  <br>Attack: 72 <br>Defense: 57 <br>Total: 365","Name: Seviper <br>Type: Poison  <br>Attack: 100 <br>Defense: 60 <br>Total: 458","Name: Skorupi <br>Type: Poison / Bug <br>Attack: 50 <br>Defense: 90 <br>Total: 330","Name: Skrelp <br>Type: Poison / Water <br>Attack: 60 <br>Defense: 60 <br>Total: 320","Name: Skuntank <br>Type: Poison / Dark <br>Attack: 93 <br>Defense: 67 <br>Total: 479","Name: Stunky <br>Type: Poison / Dark <br>Attack: 63 <br>Defense: 47 <br>Total: 329","Name: Swalot <br>Type: Poison  <br>Attack: 73 <br>Defense: 83 <br>Total: 467","Name: Toxicroak <br>Type: Poison / Fighting <br>Attack: 106 <br>Defense: 65 <br>Total: 490","Name: Trubbish <br>Type: Poison  <br>Attack: 50 <br>Defense: 62 <br>Total: 329","Name: Weezing <br>Type: Poison  <br>Attack: 90 <br>Defense: 120 <br>Total: 490","Name: Zubat <br>Type: Poison / Flying <br>Attack: 45 <br>Defense: 35 <br>Total: 245"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(160,64,160,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(160,64,160,1)"}},"hoveron":"points","name":"Poison","legendgroup":"Poison","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[20,50,125,75,100,50,30,70,48,40,55,65,48,125,65,30,55,45,45,110,160,73,35,35,90,48,48,105,100,110,25,45,25,55,50,25,65,58,30,25,57,72,75,100,33,45,23,75],"y":[15,45,70,75,100,70,50,120,45,50,55,60,54,65,65,50,95,70,65,60,60,70,30,35,130,76,76,105,100,90,45,65,45,85,45,25,75,80,40,35,55,48,130,100,58,43,48,70],"text":["Name: Abra <br>Type: Psychic  <br>Attack: 20 <br>Defense: 15 <br>Total: 310","Name: Alakazam <br>Type: Psychic  <br>Attack: 50 <br>Defense: 45 <br>Total: 500","Name: Azelf <br>Type: Psychic  <br>Attack: 125 <br>Defense: 70 <br>Total: 580","Name: Beheeyem <br>Type: Psychic  <br>Attack: 75 <br>Defense: 75 <br>Total: 485","Name: Celebi <br>Type: Psychic / Grass <br>Attack: 100 <br>Defense: 100 <br>Total: 600","Name: Chimecho <br>Type: Psychic  <br>Attack: 50 <br>Defense: 70 <br>Total: 425","Name: Chingling <br>Type: Psychic  <br>Attack: 30 <br>Defense: 50 <br>Total: 285","Name: Cresselia <br>Type: Psychic  <br>Attack: 70 <br>Defense: 120 <br>Total: 600","Name: Drowzee <br>Type: Psychic  <br>Attack: 48 <br>Defense: 45 <br>Total: 328","Name: Duosion <br>Type: Psychic  <br>Attack: 40 <br>Defense: 50 <br>Total: 370","Name: Elgyem <br>Type: Psychic  <br>Attack: 55 <br>Defense: 55 <br>Total: 335","Name: Espeon <br>Type: Psychic  <br>Attack: 65 <br>Defense: 60 <br>Total: 525","Name: Espurr <br>Type: Psychic  <br>Attack: 48 <br>Defense: 54 <br>Total: 355","Name: Gallade <br>Type: Psychic / Fighting <br>Attack: 125 <br>Defense: 65 <br>Total: 518","Name: Gardevoir <br>Type: Psychic / Fairy <br>Attack: 65 <br>Defense: 65 <br>Total: 518","Name: Gothita <br>Type: Psychic  <br>Attack: 30 <br>Defense: 50 <br>Total: 290","Name: Gothitelle <br>Type: Psychic  <br>Attack: 55 <br>Defense: 95 <br>Total: 490","Name: Gothorita <br>Type: Psychic  <br>Attack: 45 <br>Defense: 70 <br>Total: 390","Name: Grumpig <br>Type: Psychic  <br>Attack: 45 <br>Defense: 65 <br>Total: 470","Name: HoopaHoopa Confined <br>Type: Psychic / Ghost <br>Attack: 110 <br>Defense: 60 <br>Total: 600","Name: HoopaHoopa Unbound <br>Type: Psychic / Dark <br>Attack: 160 <br>Defense: 60 <br>Total: 680","Name: Hypno <br>Type: Psychic  <br>Attack: 73 <br>Defense: 70 <br>Total: 483","Name: Kadabra <br>Type: Psychic  <br>Attack: 35 <br>Defense: 30 <br>Total: 400","Name: Kirlia <br>Type: Psychic / Fairy <br>Attack: 35 <br>Defense: 35 <br>Total: 278","Name: Lugia <br>Type: Psychic / Flying <br>Attack: 90 <br>Defense: 130 <br>Total: 680","Name: MeowsticFemale <br>Type: Psychic  <br>Attack: 48 <br>Defense: 76 <br>Total: 466","Name: MeowsticMale <br>Type: Psychic  <br>Attack: 48 <br>Defense: 76 <br>Total: 466","Name: Mesprit <br>Type: Psychic  <br>Attack: 105 <br>Defense: 105 <br>Total: 580","Name: Mew <br>Type: Psychic  <br>Attack: 100 <br>Defense: 100 <br>Total: 600","Name: Mewtwo <br>Type: Psychic  <br>Attack: 110 <br>Defense: 90 <br>Total: 680","Name: Mime Jr. <br>Type: Psychic / Fairy <br>Attack: 25 <br>Defense: 45 <br>Total: 310","Name: Mr. Mime <br>Type: Psychic / Fairy <br>Attack: 45 <br>Defense: 65 <br>Total: 460","Name: Munna <br>Type: Psychic  <br>Attack: 25 <br>Defense: 45 <br>Total: 292","Name: Musharna <br>Type: Psychic  <br>Attack: 55 <br>Defense: 85 <br>Total: 487","Name: Natu <br>Type: Psychic / Flying <br>Attack: 50 <br>Defense: 45 <br>Total: 320","Name: Ralts <br>Type: Psychic / Fairy <br>Attack: 25 <br>Defense: 25 <br>Total: 198","Name: Reuniclus <br>Type: Psychic  <br>Attack: 65 <br>Defense: 75 <br>Total: 490","Name: Sigilyph <br>Type: Psychic / Flying <br>Attack: 58 <br>Defense: 80 <br>Total: 490","Name: Solosis <br>Type: Psychic  <br>Attack: 30 <br>Defense: 40 <br>Total: 290","Name: Spoink <br>Type: Psychic  <br>Attack: 25 <br>Defense: 35 <br>Total: 330","Name: Swoobat <br>Type: Psychic / Flying <br>Attack: 57 <br>Defense: 55 <br>Total: 425","Name: Unown <br>Type: Psychic  <br>Attack: 72 <br>Defense: 48 <br>Total: 336","Name: Uxie <br>Type: Psychic  <br>Attack: 75 <br>Defense: 130 <br>Total: 580","Name: Victini <br>Type: Psychic / Fire <br>Attack: 100 <br>Defense: 100 <br>Total: 600","Name: Wobbuffet <br>Type: Psychic  <br>Attack: 33 <br>Defense: 58 <br>Total: 405","Name: Woobat <br>Type: Psychic / Flying <br>Attack: 45 <br>Defense: 43 <br>Total: 313","Name: Wynaut <br>Type: Psychic  <br>Attack: 23 <br>Defense: 48 <br>Total: 260","Name: Xatu <br>Type: Psychic / Flying <br>Attack: 75 <br>Defense: 70 <br>Total: 470"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,88,136,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,88,136,1)"}},"hoveron":"points","name":"Psychic","legendgroup":"Psychic","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[105,59,95,112,140,125,77,105,52,52,105,80,50,81,125,100,80,135,120,95,80,115,64,41,55,45,40,60,45,55,84,165,100,75,42,95,100,129,134,121,89],"y":[65,50,50,45,65,100,72,115,168,67,105,95,150,97,40,150,100,130,130,115,90,105,50,77,65,135,100,125,160,145,70,60,200,85,118,85,115,90,110,119,77],"text":["Name: Aerodactyl <br>Type: Rock / Flying <br>Attack: 105 <br>Defense: 65 <br>Total: 515","Name: Amaura <br>Type: Rock / Ice <br>Attack: 59 <br>Defense: 50 <br>Total: 362","Name: Anorith <br>Type: Rock / Bug <br>Attack: 95 <br>Defense: 50 <br>Total: 355","Name: Archen <br>Type: Rock / Flying <br>Attack: 112 <br>Defense: 45 <br>Total: 401","Name: Archeops <br>Type: Rock / Flying <br>Attack: 140 <br>Defense: 65 <br>Total: 567","Name: Armaldo <br>Type: Rock / Bug <br>Attack: 125 <br>Defense: 100 <br>Total: 495","Name: Aurorus <br>Type: Rock / Ice <br>Attack: 77 <br>Defense: 72 <br>Total: 521","Name: Barbaracle <br>Type: Rock / Water <br>Attack: 105 <br>Defense: 115 <br>Total: 500","Name: Bastiodon <br>Type: Rock / Steel <br>Attack: 52 <br>Defense: 168 <br>Total: 495","Name: Binacle <br>Type: Rock / Water <br>Attack: 52 <br>Defense: 67 <br>Total: 306","Name: Boldore <br>Type: Rock  <br>Attack: 105 <br>Defense: 105 <br>Total: 390","Name: Bonsly <br>Type: Rock  <br>Attack: 80 <br>Defense: 95 <br>Total: 290","Name: Carbink <br>Type: Rock / Fairy <br>Attack: 50 <br>Defense: 150 <br>Total: 500","Name: Cradily <br>Type: Rock / Grass <br>Attack: 81 <br>Defense: 97 <br>Total: 495","Name: Cranidos <br>Type: Rock  <br>Attack: 125 <br>Defense: 40 <br>Total: 350","Name: Diancie <br>Type: Rock / Fairy <br>Attack: 100 <br>Defense: 150 <br>Total: 600","Name: Geodude <br>Type: Rock / Ground <br>Attack: 80 <br>Defense: 100 <br>Total: 300","Name: Gigalith <br>Type: Rock  <br>Attack: 135 <br>Defense: 130 <br>Total: 515","Name: Golem <br>Type: Rock / Ground <br>Attack: 120 <br>Defense: 130 <br>Total: 495","Name: Graveler <br>Type: Rock / Ground <br>Attack: 95 <br>Defense: 115 <br>Total: 390","Name: Kabuto <br>Type: Rock / Water <br>Attack: 80 <br>Defense: 90 <br>Total: 355","Name: Kabutops <br>Type: Rock / Water <br>Attack: 115 <br>Defense: 105 <br>Total: 495","Name: Larvitar <br>Type: Rock / Ground <br>Attack: 64 <br>Defense: 50 <br>Total: 300","Name: Lileep <br>Type: Rock / Grass <br>Attack: 41 <br>Defense: 77 <br>Total: 355","Name: Lunatone <br>Type: Rock / Psychic <br>Attack: 55 <br>Defense: 65 <br>Total: 440","Name: Nosepass <br>Type: Rock  <br>Attack: 45 <br>Defense: 135 <br>Total: 375","Name: Omanyte <br>Type: Rock / Water <br>Attack: 40 <br>Defense: 100 <br>Total: 355","Name: Omastar <br>Type: Rock / Water <br>Attack: 60 <br>Defense: 125 <br>Total: 495","Name: Onix <br>Type: Rock / Ground <br>Attack: 45 <br>Defense: 160 <br>Total: 385","Name: Probopass <br>Type: Rock / Steel <br>Attack: 55 <br>Defense: 145 <br>Total: 525","Name: Pupitar <br>Type: Rock / Ground <br>Attack: 84 <br>Defense: 70 <br>Total: 410","Name: Rampardos <br>Type: Rock  <br>Attack: 165 <br>Defense: 60 <br>Total: 495","Name: Regirock <br>Type: Rock  <br>Attack: 100 <br>Defense: 200 <br>Total: 580","Name: Roggenrola <br>Type: Rock  <br>Attack: 75 <br>Defense: 85 <br>Total: 280","Name: Shieldon <br>Type: Rock / Steel <br>Attack: 42 <br>Defense: 118 <br>Total: 350","Name: Solrock <br>Type: Rock / Psychic <br>Attack: 95 <br>Defense: 85 <br>Total: 440","Name: Sudowoodo <br>Type: Rock  <br>Attack: 100 <br>Defense: 115 <br>Total: 410","Name: Terrakion <br>Type: Rock / Fighting <br>Attack: 129 <br>Defense: 90 <br>Total: 580","Name: Tyranitar <br>Type: Rock / Dark <br>Attack: 134 <br>Defense: 110 <br>Total: 600","Name: Tyrantrum <br>Type: Rock / Dragon <br>Attack: 121 <br>Defense: 119 <br>Total: 521","Name: Tyrunt <br>Type: Rock / Dragon <br>Attack: 89 <br>Defense: 77 <br>Total: 362"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(184,160,56,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(184,160,56,1)"}},"hoveron":"points","name":"Rock","legendgroup":"Rock","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[110,70,55,89,24,90,120,110,80,100,80,80,55,100,90,85,135,75,75,80,85],"y":[180,100,80,116,86,129,120,150,100,100,95,91,70,115,140,85,130,100,150,140,200],"text":["Name: Aggron <br>Type: Steel / Rock <br>Attack: 110 <br>Defense: 180 <br>Total: 530","Name: Aron <br>Type: Steel / Rock <br>Attack: 70 <br>Defense: 100 <br>Total: 330","Name: Beldum <br>Type: Steel / Psychic <br>Attack: 55 <br>Defense: 80 <br>Total: 300","Name: Bronzong <br>Type: Steel / Psychic <br>Attack: 89 <br>Defense: 116 <br>Total: 500","Name: Bronzor <br>Type: Steel / Psychic <br>Attack: 24 <br>Defense: 86 <br>Total: 300","Name: Cobalion <br>Type: Steel / Fighting <br>Attack: 90 <br>Defense: 129 <br>Total: 580","Name: Dialga <br>Type: Steel / Dragon <br>Attack: 120 <br>Defense: 120 <br>Total: 680","Name: Doublade <br>Type: Steel / Ghost <br>Attack: 110 <br>Defense: 150 <br>Total: 448","Name: Honedge <br>Type: Steel / Ghost <br>Attack: 80 <br>Defense: 100 <br>Total: 325","Name: Jirachi <br>Type: Steel / Psychic <br>Attack: 100 <br>Defense: 100 <br>Total: 600","Name: Klang <br>Type: Steel  <br>Attack: 80 <br>Defense: 95 <br>Total: 440","Name: Klefki <br>Type: Steel / Fairy <br>Attack: 80 <br>Defense: 91 <br>Total: 470","Name: Klink <br>Type: Steel  <br>Attack: 55 <br>Defense: 70 <br>Total: 300","Name: Klinklang <br>Type: Steel  <br>Attack: 100 <br>Defense: 115 <br>Total: 520","Name: Lairon <br>Type: Steel / Rock <br>Attack: 90 <br>Defense: 140 <br>Total: 430","Name: Mawile <br>Type: Steel / Fairy <br>Attack: 85 <br>Defense: 85 <br>Total: 380","Name: Metagross <br>Type: Steel / Psychic <br>Attack: 135 <br>Defense: 130 <br>Total: 600","Name: Metang <br>Type: Steel / Psychic <br>Attack: 75 <br>Defense: 100 <br>Total: 420","Name: Registeel <br>Type: Steel  <br>Attack: 75 <br>Defense: 150 <br>Total: 580","Name: Skarmory <br>Type: Steel / Flying <br>Attack: 80 <br>Defense: 140 <br>Total: 465","Name: Steelix <br>Type: Steel / Ground <br>Attack: 85 <br>Defense: 200 <br>Total: 510"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(184,184,208,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(184,184,208,1)"}},"hoveron":"points","name":"Steel","legendgroup":"Steel","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[75,50,48,92,83,65,108,90,38,64,53,73,95,80,55,120,80,70,75,44,86,15,105,49,105,40,56,63,83,67,82,84,95,125,40,104,60,95,130,105,100,58,85,50,30,70,69,30,10,100,40,20,20,85,60,70,105,55,120,65,53,50,80,51,75,50,65,95,66,52,85,95,90,65,100,65,92,45,95,120,65,48,98,75,75,65,48,75,45,75,110,87,40,70,78,65,50,65,70,90,63,30,45],"y":[80,80,43,65,100,35,133,20,38,85,62,88,180,65,85,85,80,80,60,50,88,20,100,56,55,50,40,52,68,60,78,105,67,79,70,105,70,95,115,90,90,58,80,50,30,70,76,55,55,100,70,50,50,70,79,50,75,45,100,55,48,100,80,53,75,40,65,95,68,48,85,75,130,35,85,95,65,55,75,40,100,48,63,110,80,65,65,85,55,115,90,63,35,65,103,64,40,60,35,45,80,30,45],"text":["Name: Alomomola <br>Type: Water  <br>Attack: 75 <br>Defense: 80 <br>Total: 470","Name: Azumarill <br>Type: Water / Fairy <br>Attack: 50 <br>Defense: 80 <br>Total: 420","Name: Barboach <br>Type: Water / Ground <br>Attack: 48 <br>Defense: 43 <br>Total: 288","Name: Basculin <br>Type: Water  <br>Attack: 92 <br>Defense: 65 <br>Total: 460","Name: Blastoise <br>Type: Water  <br>Attack: 83 <br>Defense: 100 <br>Total: 530","Name: Buizel <br>Type: Water  <br>Attack: 65 <br>Defense: 35 <br>Total: 330","Name: Carracosta <br>Type: Water / Rock <br>Attack: 108 <br>Defense: 133 <br>Total: 495","Name: Carvanha <br>Type: Water / Dark <br>Attack: 90 <br>Defense: 20 <br>Total: 305","Name: Chinchou <br>Type: Water / Electric <br>Attack: 38 <br>Defense: 38 <br>Total: 330","Name: Clamperl <br>Type: Water  <br>Attack: 64 <br>Defense: 85 <br>Total: 345","Name: Clauncher <br>Type: Water  <br>Attack: 53 <br>Defense: 62 <br>Total: 330","Name: Clawitzer <br>Type: Water  <br>Attack: 73 <br>Defense: 88 <br>Total: 500","Name: Cloyster <br>Type: Water / Ice <br>Attack: 95 <br>Defense: 180 <br>Total: 525","Name: Corphish <br>Type: Water  <br>Attack: 80 <br>Defense: 65 <br>Total: 308","Name: Corsola <br>Type: Water / Rock <br>Attack: 55 <br>Defense: 85 <br>Total: 380","Name: Crawdaunt <br>Type: Water / Dark <br>Attack: 120 <br>Defense: 85 <br>Total: 468","Name: Croconaw <br>Type: Water  <br>Attack: 80 <br>Defense: 80 <br>Total: 405","Name: Dewgong <br>Type: Water / Ice <br>Attack: 70 <br>Defense: 80 <br>Total: 475","Name: Dewott <br>Type: Water  <br>Attack: 75 <br>Defense: 60 <br>Total: 413","Name: Ducklett <br>Type: Water / Flying <br>Attack: 44 <br>Defense: 50 <br>Total: 305","Name: Empoleon <br>Type: Water / Steel <br>Attack: 86 <br>Defense: 88 <br>Total: 530","Name: Feebas <br>Type: Water  <br>Attack: 15 <br>Defense: 20 <br>Total: 200","Name: Feraligatr <br>Type: Water  <br>Attack: 105 <br>Defense: 100 <br>Total: 530","Name: Finneon <br>Type: Water  <br>Attack: 49 <br>Defense: 56 <br>Total: 330","Name: Floatzel <br>Type: Water  <br>Attack: 105 <br>Defense: 55 <br>Total: 495","Name: Frillish <br>Type: Water / Ghost <br>Attack: 40 <br>Defense: 50 <br>Total: 335","Name: Froakie <br>Type: Water  <br>Attack: 56 <br>Defense: 40 <br>Total: 314","Name: Frogadier <br>Type: Water  <br>Attack: 63 <br>Defense: 52 <br>Total: 405","Name: Gastrodon <br>Type: Water / Ground <br>Attack: 83 <br>Defense: 68 <br>Total: 475","Name: Goldeen <br>Type: Water  <br>Attack: 67 <br>Defense: 60 <br>Total: 320","Name: Golduck <br>Type: Water  <br>Attack: 82 <br>Defense: 78 <br>Total: 500","Name: Gorebyss <br>Type: Water  <br>Attack: 84 <br>Defense: 105 <br>Total: 485","Name: Greninja <br>Type: Water / Dark <br>Attack: 95 <br>Defense: 67 <br>Total: 530","Name: Gyarados <br>Type: Water / Flying <br>Attack: 125 <br>Defense: 79 <br>Total: 540","Name: Horsea <br>Type: Water  <br>Attack: 40 <br>Defense: 70 <br>Total: 295","Name: Huntail <br>Type: Water  <br>Attack: 104 <br>Defense: 105 <br>Total: 485","Name: Jellicent <br>Type: Water / Ghost <br>Attack: 60 <br>Defense: 70 <br>Total: 480","Name: Kingdra <br>Type: Water / Dragon <br>Attack: 95 <br>Defense: 95 <br>Total: 540","Name: Kingler <br>Type: Water  <br>Attack: 130 <br>Defense: 115 <br>Total: 475","Name: Krabby <br>Type: Water  <br>Attack: 105 <br>Defense: 90 <br>Total: 325","Name: Kyogre <br>Type: Water  <br>Attack: 100 <br>Defense: 90 <br>Total: 670","Name: Lanturn <br>Type: Water / Electric <br>Attack: 58 <br>Defense: 58 <br>Total: 460","Name: Lapras <br>Type: Water / Ice <br>Attack: 85 <br>Defense: 80 <br>Total: 535","Name: Lombre <br>Type: Water / Grass <br>Attack: 50 <br>Defense: 50 <br>Total: 340","Name: Lotad <br>Type: Water / Grass <br>Attack: 30 <br>Defense: 30 <br>Total: 220","Name: Ludicolo <br>Type: Water / Grass <br>Attack: 70 <br>Defense: 70 <br>Total: 480","Name: Lumineon <br>Type: Water  <br>Attack: 69 <br>Defense: 76 <br>Total: 460","Name: Luvdisc <br>Type: Water  <br>Attack: 30 <br>Defense: 55 <br>Total: 330","Name: Magikarp <br>Type: Water  <br>Attack: 10 <br>Defense: 55 <br>Total: 200","Name: Manaphy <br>Type: Water  <br>Attack: 100 <br>Defense: 100 <br>Total: 600","Name: Mantine <br>Type: Water / Flying <br>Attack: 40 <br>Defense: 70 <br>Total: 465","Name: Mantyke <br>Type: Water / Flying <br>Attack: 20 <br>Defense: 50 <br>Total: 345","Name: Marill <br>Type: Water / Fairy <br>Attack: 20 <br>Defense: 50 <br>Total: 250","Name: Marshtomp <br>Type: Water / Ground <br>Attack: 85 <br>Defense: 70 <br>Total: 405","Name: Milotic <br>Type: Water  <br>Attack: 60 <br>Defense: 79 <br>Total: 540","Name: Mudkip <br>Type: Water  <br>Attack: 70 <br>Defense: 50 <br>Total: 310","Name: Octillery <br>Type: Water  <br>Attack: 105 <br>Defense: 75 <br>Total: 480","Name: Oshawott <br>Type: Water  <br>Attack: 55 <br>Defense: 45 <br>Total: 308","Name: Palkia <br>Type: Water / Dragon <br>Attack: 120 <br>Defense: 100 <br>Total: 680","Name: Palpitoad <br>Type: Water / Ground <br>Attack: 65 <br>Defense: 55 <br>Total: 384","Name: Panpour <br>Type: Water  <br>Attack: 53 <br>Defense: 48 <br>Total: 316","Name: Pelipper <br>Type: Water / Flying <br>Attack: 50 <br>Defense: 100 <br>Total: 430","Name: Phione <br>Type: Water  <br>Attack: 80 <br>Defense: 80 <br>Total: 480","Name: Piplup <br>Type: Water  <br>Attack: 51 <br>Defense: 53 <br>Total: 314","Name: Politoed <br>Type: Water  <br>Attack: 75 <br>Defense: 75 <br>Total: 500","Name: Poliwag <br>Type: Water  <br>Attack: 50 <br>Defense: 40 <br>Total: 300","Name: Poliwhirl <br>Type: Water  <br>Attack: 65 <br>Defense: 65 <br>Total: 385","Name: Poliwrath <br>Type: Water / Fighting <br>Attack: 95 <br>Defense: 95 <br>Total: 510","Name: Prinplup <br>Type: Water  <br>Attack: 66 <br>Defense: 68 <br>Total: 405","Name: Psyduck <br>Type: Water  <br>Attack: 52 <br>Defense: 48 <br>Total: 320","Name: Quagsire <br>Type: Water / Ground <br>Attack: 85 <br>Defense: 85 <br>Total: 430","Name: Qwilfish <br>Type: Water / Poison <br>Attack: 95 <br>Defense: 75 <br>Total: 430","Name: Relicanth <br>Type: Water / Rock <br>Attack: 90 <br>Defense: 130 <br>Total: 485","Name: Remoraid <br>Type: Water  <br>Attack: 65 <br>Defense: 35 <br>Total: 300","Name: Samurott <br>Type: Water  <br>Attack: 100 <br>Defense: 85 <br>Total: 528","Name: Seadra <br>Type: Water  <br>Attack: 65 <br>Defense: 95 <br>Total: 440","Name: Seaking <br>Type: Water  <br>Attack: 92 <br>Defense: 65 <br>Total: 450","Name: Seel <br>Type: Water  <br>Attack: 45 <br>Defense: 55 <br>Total: 325","Name: Seismitoad <br>Type: Water / Ground <br>Attack: 95 <br>Defense: 75 <br>Total: 509","Name: Sharpedo <br>Type: Water / Dark <br>Attack: 120 <br>Defense: 40 <br>Total: 460","Name: Shellder <br>Type: Water  <br>Attack: 65 <br>Defense: 100 <br>Total: 305","Name: Shellos <br>Type: Water  <br>Attack: 48 <br>Defense: 48 <br>Total: 325","Name: Simipour <br>Type: Water  <br>Attack: 98 <br>Defense: 63 <br>Total: 498","Name: Slowbro <br>Type: Water / Psychic <br>Attack: 75 <br>Defense: 110 <br>Total: 490","Name: Slowking <br>Type: Water / Psychic <br>Attack: 75 <br>Defense: 80 <br>Total: 490","Name: Slowpoke <br>Type: Water / Psychic <br>Attack: 65 <br>Defense: 65 <br>Total: 315","Name: Squirtle <br>Type: Water  <br>Attack: 48 <br>Defense: 65 <br>Total: 314","Name: Starmie <br>Type: Water / Psychic <br>Attack: 75 <br>Defense: 85 <br>Total: 520","Name: Staryu <br>Type: Water  <br>Attack: 45 <br>Defense: 55 <br>Total: 340","Name: Suicune <br>Type: Water  <br>Attack: 75 <br>Defense: 115 <br>Total: 580","Name: Swampert <br>Type: Water / Ground <br>Attack: 110 <br>Defense: 90 <br>Total: 535","Name: Swanna <br>Type: Water / Flying <br>Attack: 87 <br>Defense: 63 <br>Total: 473","Name: Tentacool <br>Type: Water / Poison <br>Attack: 40 <br>Defense: 35 <br>Total: 335","Name: Tentacruel <br>Type: Water / Poison <br>Attack: 70 <br>Defense: 65 <br>Total: 515","Name: Tirtouga <br>Type: Water / Rock <br>Attack: 78 <br>Defense: 103 <br>Total: 355","Name: Totodile <br>Type: Water  <br>Attack: 65 <br>Defense: 64 <br>Total: 314","Name: Tympole <br>Type: Water  <br>Attack: 50 <br>Defense: 40 <br>Total: 294","Name: Vaporeon <br>Type: Water  <br>Attack: 65 <br>Defense: 60 <br>Total: 525","Name: Wailmer <br>Type: Water  <br>Attack: 70 <br>Defense: 35 <br>Total: 400","Name: Wailord <br>Type: Water  <br>Attack: 90 <br>Defense: 45 <br>Total: 500","Name: Wartortle <br>Type: Water  <br>Attack: 63 <br>Defense: 80 <br>Total: 405","Name: Wingull <br>Type: Water / Flying <br>Attack: 30 <br>Defense: 30 <br>Total: 270","Name: Wooper <br>Type: Water / Ground <br>Attack: 45 <br>Defense: 45 <br>Total: 210"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(104,144,240,1)","opacity":0.75,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(104,144,240,1)"}},"hoveron":"points","name":"Water","legendgroup":"Water","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.098381070983812,"r":7.9701120797011216,"b":40.647571606475722,"l":47.023661270236623},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":15.940224159402241},"title":{"text":"Attack vs Defense by Type","font":{"color":"rgba(0,0,0,1)","family":"","size":19.128268991282692},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-3,173],"tickmode":"array","ticktext":["0","50","100","150"],"tickvals":[0,50,100,150],"categoryorder":"array","categoryarray":["0","50","100","150"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.9850560398505603,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"Attack","font":{"color":"rgba(0,0,0,1)","family":"","size":15.940224159402241}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-6.25,241.25],"tickmode":"array","ticktext":["0","50","100","150","200"],"tickvals":[0,50,100,150,200],"categoryorder":"array","categoryarray":["0","50","100","150","200"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.9850560398505608,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Defense","font":{"color":"rgba(0,0,0,1)","family":"","size":15.940224159402241}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"rgba(255,255,255,1)","line":{"color":"rgba(51,51,51,1)","width":0,"linetype":"solid"},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":12.7521793275218},"title":{"text":"Primary Type","font":{"color":"rgba(0,0,0,1)","family":"","size":15.940224159402241}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"4913efcf3fc":{"x":{},"y":{},"colour":{},"text":{},"type":"scatter"}},"cur_data":"4913efcf3fc","visdat":{"4913efcf3fc":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div><div class="bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="plotly html-widget html-fill-item html-fill-container" id="htmlwidget-3a4661a6962ecafdd5a7" style="width:100%;height:406px;"></div>
+<script type="application/json" data-for="htmlwidget-3a4661a6962ecafdd5a7">{"x":{"data":[{"orientation":"h","width":0.89999999999999991,"base":0,"x":[363.6825396825397],"y":[1],"text":"reorder(type_1, avg_total): Bug<br />avg_total: 363.6825<br />type_1: Bug","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(168,184,32,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Bug","legendgroup":"Bug","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":0.89999999999999858,"base":0,"x":[434.75],"y":[13],"text":"reorder(type_1, avg_total): Dark<br />avg_total: 434.7500<br />type_1: Dark","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(112,88,72,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Dark","legendgroup":"Dark","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":0.89999999999999858,"base":0,"x":[497.69565217391306],"y":[18],"text":"reorder(type_1, avg_total): Dragon<br />avg_total: 497.6957<br />type_1: Dragon","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(112,56,248,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Dragon","legendgroup":"Dragon","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":0.89999999999999858,"base":0,"x":[426.79487179487177],"y":[11],"text":"reorder(type_1, avg_total): Electric<br />avg_total: 426.7949<br />type_1: Electric","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(248,208,48,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Electric","legendgroup":"Electric","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":0.89999999999999947,"base":0,"x":[413.1764705882353],"y":[8],"text":"reorder(type_1, avg_total): Fairy<br />avg_total: 413.1765<br />type_1: Fairy","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(238,153,172,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Fairy","legendgroup":"Fairy","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":0.90000000000000036,"base":0,"x":[404.36000000000001],"y":[5],"text":"reorder(type_1, avg_total): Fighting<br />avg_total: 404.3600<br />type_1: Fighting","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(192,48,40,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Fighting","legendgroup":"Fighting","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":0.89999999999999858,"base":0,"x":[443.87234042553189],"y":[15],"text":"reorder(type_1, avg_total): Fire<br />avg_total: 443.8723<br />type_1: Fire","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(240,128,48,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Fire","legendgroup":"Fire","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":0.90000000000000036,"base":0,"x":[390],"y":[3],"text":"reorder(type_1, avg_total): Flying<br />avg_total: 390.0000<br />type_1: Flying","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(168,144,240,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Flying","legendgroup":"Flying","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":0.90000000000000036,"base":0,"x":[412.53571428571428],"y":[7],"text":"reorder(type_1, avg_total): Ghost<br />avg_total: 412.5357<br />type_1: Ghost","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(112,88,152,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Ghost","legendgroup":"Ghost","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":0.90000000000000036,"base":0,"x":[404.78125],"y":[6],"text":"reorder(type_1, avg_total): Grass<br />avg_total: 404.7812<br />type_1: Grass","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(120,200,80,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Grass","legendgroup":"Grass","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":0.89999999999999858,"base":0,"x":[413.57142857142856],"y":[9],"text":"reorder(type_1, avg_total): Ground<br />avg_total: 413.5714<br />type_1: Ground","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(224,192,104,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Ground","legendgroup":"Ground","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":0.89999999999999858,"base":0,"x":[427.08695652173913],"y":[12],"text":"reorder(type_1, avg_total): Ice<br />avg_total: 427.0870<br />type_1: Ice","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(152,216,216,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Ice","legendgroup":"Ice","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":0.90000000000000013,"base":0,"x":[389.9021739130435],"y":[2],"text":"reorder(type_1, avg_total): Normal<br />avg_total: 389.9022<br />type_1: Normal","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(168,168,120,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Normal","legendgroup":"Normal","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":0.90000000000000036,"base":0,"x":[399.14285714285717],"y":[4],"text":"reorder(type_1, avg_total): Poison<br />avg_total: 399.1429<br />type_1: Poison","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(160,64,160,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Poison","legendgroup":"Poison","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":0.89999999999999858,"base":0,"x":[444.64583333333331],"y":[16],"text":"reorder(type_1, avg_total): Psychic<br />avg_total: 444.6458<br />type_1: Psychic","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(248,88,136,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Psychic","legendgroup":"Psychic","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":0.89999999999999858,"base":0,"x":[437.80487804878049],"y":[14],"text":"reorder(type_1, avg_total): Rock<br />avg_total: 437.8049<br />type_1: Rock","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(184,160,56,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Rock","legendgroup":"Rock","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":0.89999999999999858,"base":0,"x":[462.28571428571428],"y":[17],"text":"reorder(type_1, avg_total): Steel<br />avg_total: 462.2857<br />type_1: Steel","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(184,184,208,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Steel","legendgroup":"Steel","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"h","width":0.89999999999999858,"base":0,"x":[415.126213592233],"y":[10],"text":"reorder(type_1, avg_total): Water<br />avg_total: 415.1262<br />type_1: Water","type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(104,144,240,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Water","legendgroup":"Water","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.098381070983812,"r":7.9701120797011216,"b":40.647571606475722,"l":78.904109589041127},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":15.940224159402241},"title":{"text":"Average Total Stats by Type","font":{"color":"rgba(0,0,0,1)","family":"","size":19.128268991282692},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-24.884782608695655,522.58043478260868],"tickmode":"array","ticktext":["0","100","200","300","400","500"],"tickvals":[0,100,200,300,400,500],"categoryorder":"array","categoryarray":["0","100","200","300","400","500"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.9850560398505603,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"Average Total Stat","font":{"color":"rgba(0,0,0,1)","family":"","size":15.940224159402241}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,18.600000000000001],"tickmode":"array","ticktext":["Bug","Normal","Flying","Poison","Fighting","Grass","Ghost","Fairy","Ground","Water","Electric","Ice","Dark","Rock","Fire","Psychic","Steel","Dragon"],"tickvals":[1,2,3,4,5,5.9999999999999991,7,8,9,10,11,12,13,14,15,16,17,18],"categoryorder":"array","categoryarray":["Bug","Normal","Flying","Poison","Fighting","Grass","Ghost","Fairy","Ground","Water","Electric","Ice","Dark","Rock","Fire","Psychic","Steel","Dragon"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.9850560398505608,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Type","font":{"color":"rgba(0,0,0,1)","family":"","size":15.940224159402241}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"rgba(255,255,255,1)","line":{"color":"rgba(51,51,51,1)","width":0,"linetype":"solid"},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":12.7521793275218},"title":{"text":"Primary Type","font":{"color":"rgba(0,0,0,1)","family":"","size":15.940224159402241}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"49131a153de8":{"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"49131a153de8","visdat":{"49131a153de8":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+<div class="bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="plotly html-widget html-fill-item html-fill-container" id="htmlwidget-d7e07f85d3c60f7add73" style="width:100%;height:406px;"></div>
+<script type="application/json" data-for="htmlwidget-d7e07f85d3c60f7add73">{"x":{"data":[{"x":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"y":[200,310,555,500,450,425,310,505,390,325,195,265,505,270,295,323,310,460,535,460,325,580,485,480,520,413,479,495,365,515,365,455,195,483,288,490,345,299,318,405,438,320,475,525,300,540,328,490,405,500,530,340,205,305,395,405,355,540,405,320,490,440,525,515,315,320,442,385,350,580,465,273,455,525,355,490,485,520,262,450,300,300,410,275,495,405,385,455,495,335,305,405,305,440,420,300,320,309,251,314,390,500,483,500,450,330,495,490,505,534,385,395,490,435,455,300,325,320,400,500,435,395,490,325,325,285,680,245,405,525,352,325,510,455,253,475,205,349,505,395,500,288,600,525,600,290,305,340,580],"hoverinfo":"y","type":"box","fillcolor":"rgba(248,118,109,0.85)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(51,51,51,1)","width":1.8897637795275593},"name":"1","legendgroup":"1","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"y":[540,250,600,405,490,330,465,262,390,465,205,500,410,405,442,210,360,330,500,510,430,455,580,360,415,318,435,180,450,510,490,365,500,300,210,405,340,390,430,405,580,290,450,534,600,680,535,415,525,265,425,490,500,505,330,515,300,405,525,218,330,314,330,305,420,309,465,215,460,390,300,465,455,410,280,250,320,245,405,365,380,470,336,480,500,250,530,680,460,580,430,250,250,410,500,430,250,210,540],"hoverinfo":"y","type":"box","fillcolor":"rgba(183,159,0,0.85)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(51,51,51,1)","width":1.8897637795275593},"name":"2","legendgroup":"2","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],"y":[220,670,395,485,400,530,237,380,490,310,670,485,455,355,302,355,385,269,310,600,535,500,420,410,430,295,308,400,530,270,500,295,430,280,400,458,380,425,405,460,520,580,475,530,300,460,474,240,467,340,305,270,465,420,345,300,430,460,330,470,540,280,290,475,530,198,310,480,470,518,580,195,670,420,600,440,460,405,236,305,600,480,220,440,495,405,455,330,380,600,468,485,440,480,680,260,405,295,300,260,288,205,410,456,405,295,420,360,440,290,600,190,420,495,266,205,375,200,490,240,335,278,400,300,414,458,340,220,340,330,360,310,580],"hoverinfo":"y","type":"box","fillcolor":"rgba(0,186,56,0.85)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(51,51,51,1)","width":1.8897637795275593},"name":"3","legendgroup":"3","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"y":[494,518,329,540,452,600,535,411,410,530,600,482,534,405,600,345,285,720,670,348,475,220,500,300,280,330,474,495,580,580,485,498,405,525,520,520,520,680,495,310,309,495,525,495,330,530,424,535,450,250,390,540,525,480,350,480,224,290,263,460,479,334,535,405,300,314,384,490,244,535,500,600,510,515,330,454,275,600,194,300,505,410,680,310,350,424,480,330,520,350,525,525,405,525,510,523,325,285,440,245,318,545,485,515,363,580,424,340,525],"hoverinfo":"y","type":"box","fillcolor":"rgba(0,191,196,0.85)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(51,51,51,1)","width":1.8897637795275593},"name":"4","legendgroup":"4","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5],"y":[295,520,495,515,316,313,519,300,510,472,300,488,500,484,470,370,475,305,358,480,348,405,475,485,498,351,485,567,528,401,495,380,540,600,500,510,490,308,487,473,316,480,325,294,315,600,308,280,484,445,370,370,464,335,490,485,490,410,329,275,485,488,384,335,292,515,528,413,390,390,405,305,413,335,360,460,490,580,303,498,471,280,319,316,489,520,420,485,340,350,483,540,508,428,292,290,446,310,420,294,275,303,290,360,498,281,505,320,474,328,490,395,418,680,461,495,275,465,255,465,305,440,550,535,300,305,305,480,528,470,264,308,280,480,260,350,600,355,680,330,370,580,580,510,425,509,497,660,305,483,510,315],"hoverinfo":"y","type":"box","fillcolor":"rgba(97,156,255,0.85)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(51,51,51,1)","width":1.8897637795275593},"name":"5","legendgroup":"5","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6],"y":[371,313,300,494,335,466,306,600,335,466,325,335,278,482,405,462,499,521,335,362,362,680,474,494,600,200,494,530,500,431,521,481,245,535,534,409,411,405,423,303,448,382,355,495,350,552,348,494,470,494,304,600,452,530,472,309,288,480,341,507,525,320,330,500,314,680,369,500,680,213,514,237,289,307,600,341,531,500],"hoverinfo":"y","type":"box","fillcolor":"rgba(245,100,227,0.85)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(51,51,51,1)","width":1.8897637795275593},"name":"6","legendgroup":"6","showlegend":true,"xaxis":"x","yaxis":"y","frame":null}],"layout":{"margin":{"t":43.098381070983812,"r":7.9701120797011216,"b":40.647571606475722,"l":47.023661270236623},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":15.940224159402241},"title":{"text":"Total Stats by Generation","font":{"color":"rgba(0,0,0,1)","family":"","size":19.128268991282692},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,6.5999999999999996],"tickmode":"array","ticktext":["1","2","3","4","5","6"],"tickvals":[1,2,3,3.9999999999999996,5,6],"categoryorder":"array","categoryarray":["1","2","3","4","5","6"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.9850560398505603,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"Generation","font":{"color":"rgba(0,0,0,1)","family":"","size":15.940224159402241}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[153,747],"tickmode":"array","ticktext":["200","400","600"],"tickvals":[200,400,600],"categoryorder":"array","categoryarray":["200","400","600"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.9850560398505608,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":12.7521793275218},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Total Stat","font":{"color":"rgba(0,0,0,1)","family":"","size":15.940224159402241}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"rgba(255,255,255,1)","line":{"color":"rgba(51,51,51,1)","width":0,"linetype":"solid"},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":12.7521793275218},"title":{"text":"Generation","font":{"color":"rgba(0,0,0,1)","family":"","size":15.940224159402241}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"49137557b239":{"x":{},"y":{},"fill":{},"type":"box"}},"cur_data":"49137557b239","visdat":{"49137557b239":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div><div class="bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+Table:
+<center>
+<h5>
+<b>Top 15 Pokemon by Total Stat</b>
+</h5>
+</center>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 5%">
+<col style="width: 3%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">name</th>
+<th style="text-align: left;">type_1</th>
+<th style="text-align: left;">type_2</th>
+<th style="text-align: right;">generation</th>
+<th style="text-align: left;">legendary</th>
+<th style="text-align: right;">total</th>
+<th style="text-align: right;">hp</th>
+<th style="text-align: right;">attack</th>
+<th style="text-align: right;">defense</th>
+<th style="text-align: right;">sp_atk</th>
+<th style="text-align: right;">sp_def</th>
+<th style="text-align: right;">speed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Arceus</td>
+<td style="text-align: left;">Normal</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">720</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">120</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dialga</td>
+<td style="text-align: left;">Steel</td>
+<td style="text-align: left;">Dragon</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">680</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">90</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ho-oh</td>
+<td style="text-align: left;">Fire</td>
+<td style="text-align: left;">Flying</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">680</td>
+<td style="text-align: right;">106</td>
+<td style="text-align: right;">130</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">154</td>
+<td style="text-align: right;">90</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HoopaHoopa Unbound</td>
+<td style="text-align: left;">Psychic</td>
+<td style="text-align: left;">Dark</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">680</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">160</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">170</td>
+<td style="text-align: right;">130</td>
+<td style="text-align: right;">80</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lugia</td>
+<td style="text-align: left;">Psychic</td>
+<td style="text-align: left;">Flying</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">680</td>
+<td style="text-align: right;">106</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">130</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">154</td>
+<td style="text-align: right;">110</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mewtwo</td>
+<td style="text-align: left;">Psychic</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">680</td>
+<td style="text-align: right;">106</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">154</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">130</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Palkia</td>
+<td style="text-align: left;">Water</td>
+<td style="text-align: left;">Dragon</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">680</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Rayquaza</td>
+<td style="text-align: left;">Dragon</td>
+<td style="text-align: left;">Flying</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">680</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">95</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Reshiram</td>
+<td style="text-align: left;">Dragon</td>
+<td style="text-align: left;">Fire</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">680</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">90</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Xerneas</td>
+<td style="text-align: left;">Fairy</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">680</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">131</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">131</td>
+<td style="text-align: right;">98</td>
+<td style="text-align: right;">99</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Yveltal</td>
+<td style="text-align: left;">Dark</td>
+<td style="text-align: left;">Flying</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">680</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">131</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">131</td>
+<td style="text-align: right;">98</td>
+<td style="text-align: right;">99</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Zekrom</td>
+<td style="text-align: left;">Dragon</td>
+<td style="text-align: left;">Electric</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">680</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">90</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Groudon</td>
+<td style="text-align: left;">Ground</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">670</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">140</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">90</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Kyogre</td>
+<td style="text-align: left;">Water</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">670</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">140</td>
+<td style="text-align: right;">90</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Regigigas</td>
+<td style="text-align: left;">Normal</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">670</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">160</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">110</td>
+<td style="text-align: right;">100</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div id="3ade8a4a-fb1d-4a6c-8409-ac45482d5fc9" class="hidden">
+
+</div>
+</div>
+</div>
+</div>
+
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /container fluid -->
+
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (_event) {
+  if (window.bslib.Card) {
+    window.bslib.Card.initializeAllCards();
+  }
+}); 
+</script>
+  
+
+
+
+</body></html>
